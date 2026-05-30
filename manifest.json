@@ -1,0 +1,18 @@
+{
+  "name": "Race Ready",
+  "short_name": "Race Ready",
+  "description": "Running training tracker and race planner",
+  "start_url": "./race-ready.html",
+  "display": "standalone",
+  "background_color": "#1b1f24",
+  "theme_color": "#00DF81",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "Icon - favicon primary.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
