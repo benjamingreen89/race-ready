@@ -101,22 +101,23 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .ni-label{display:block}
 
 /* TABLET (iPad) — expand content width */
-@media(min-width:768px){
-  body{max-width:700px}
-  .nav{max-width:700px}
+@media(min-width:768px) and (max-width:1023px){
+  body{max-width:720px}
+  .nav{max-width:720px}
 }
 
 /* DESKTOP — side nav */
 @media(min-width:1024px){
   :root{--tabh:0px}
-  body{max-width:none;margin:0;display:grid;grid-template-columns:200px 1fr;min-height:100vh}
-  body::before{grid-column:1/-1}
-  .nav{position:fixed;left:0;top:0;bottom:0;width:200px;height:100vh;max-width:200px;transform:none;flex-direction:column;justify-content:flex-start;align-items:stretch;padding:24px 0 24px;border-top:none;border-right:1px solid var(--cb);gap:4px}
-  .ni{flex-direction:row;justify-content:flex-start;gap:12px;padding:12px 20px;font-size:13px;letter-spacing:.3px;border-radius:10px;margin:0 8px;width:calc(100% - 16px)}
-  .ni-emoji{font-size:18px}
+  body{max-width:none;margin:0;min-height:100vh}
+  .nav{position:fixed;left:0;top:0;bottom:0;width:220px;height:100vh;max-width:220px;transform:none;flex-direction:column;justify-content:flex-start;align-items:stretch;padding:32px 0;border-top:none;border-right:1px solid var(--cb);gap:2px}
+  .ni{flex-direction:row;justify-content:flex-start;gap:14px;padding:13px 20px;font-size:14px;letter-spacing:.2px;border-radius:10px;margin:0 8px;width:calc(100% - 16px);text-transform:none}
+  .ni-emoji{font-size:20px}
+  .ni-label{font-size:14px;font-weight:500}
   .ni.active{background:var(--ag);color:var(--accent)}
-  .tab{margin-left:200px;padding-bottom:24px;max-width:860px}
-  .ph{padding-top:32px}
+  .tab{margin-left:220px;padding:0 40px 40px;max-width:none;width:calc(100vw - 220px);box-sizing:border-box}
+  .ph{padding:32px 0 16px}
+  .sec{padding:0 0 16px}
 }
 /* CARDS */
 .card{background:var(--card);border:1px solid var(--cb);border-radius:var(--r);padding:18px}
