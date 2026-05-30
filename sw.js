@@ -1,4 +1,4 @@
-const CACHE = 'race-ready-v1';
+const CACHE = 'race-ready-v2';
 const ASSETS = [
   './race-ready.html',
   './manifest.json',
