@@ -355,19 +355,27 @@ body::-webkit-scrollbar{display:none}
   <div class="sec" style="padding-top:0">
     <div class="card" style="background:linear-gradient(140deg,rgba(0,223,129,0.08) 0%,var(--card) 55%);border-color:rgba(0,223,129,.18)">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
-        <div>
-          <div id="phase-badge" class="badge ba" style="margin-bottom:8px">— Phase</div>
-          <div style="font-family:var(--fh);font-size:50px;font-weight:700;letter-spacing:-3px;line-height:1;color:var(--t1)" id="cdays">—</div>
-          <div style="font-size:12px;color:var(--t2);margin-top:4px">days to Melbourne · <span class="at" id="cweek">Week —</span></div>
+        <div style="flex:1;min-width:0;padding-right:12px">
+          <div id="phase-name-hdr" style="font-family:var(--fh);font-size:22px;font-weight:700;line-height:1;margin-bottom:6px;color:var(--accent)">—</div>
+          <div style="font-family:var(--fh);font-size:44px;font-weight:700;letter-spacing:-3px;line-height:1;color:var(--t1)" id="phase-days-rem">—</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:4px">days left in phase</div>
+          <div style="font-size:12px;margin-top:3px"><span class="at" id="phase-week-lbl">Week — of —</span></div>
         </div>
-        <div style="position:relative;display:flex;align-items:center;justify-content:center">
-          <svg width="80" height="80" viewBox="0 0 80 80" style="transform:rotate(-90deg)">
-            <circle cx="40" cy="40" r="34" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="5"/>
-            <circle cx="40" cy="40" r="34" fill="none" stroke="var(--accent)" stroke-width="5" stroke-linecap="round" stroke-dasharray="213.6" id="cring" stroke-dashoffset="213.6" style="transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)"/>
-          </svg>
-          <div style="position:absolute;text-align:center">
-            <div style="font-family:var(--fh);font-size:15px;font-weight:700;color:var(--accent)" id="cpct">0%</div>
-            <div style="font-size:8px;color:var(--t3);letter-spacing:.5px">DONE</div>
+        <div style="text-align:right;flex-shrink:0">
+          <div style="font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Days to Melbourne</div>
+          <div style="font-family:var(--fh);font-size:44px;font-weight:700;letter-spacing:-3px;line-height:1;color:var(--t1)" id="cdays">—</div>
+          <div style="font-size:12px;color:var(--t2);margin-top:4px"><span class="at" id="cweek">Week — of 19</span></div>
+          <div style="margin-top:10px;display:flex;justify-content:flex-end">
+            <div style="position:relative;display:flex;align-items:center;justify-content:center">
+              <svg width="56" height="56" viewBox="0 0 56 56" style="transform:rotate(-90deg)">
+                <circle cx="28" cy="28" r="23" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="4"/>
+                <circle cx="28" cy="28" r="23" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round" stroke-dasharray="144.5" id="cring" stroke-dashoffset="144.5" style="transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)"/>
+              </svg>
+              <div style="position:absolute;text-align:center">
+                <div style="font-family:var(--fh);font-size:10px;font-weight:700;color:var(--accent)" id="cpct">0%</div>
+                <div style="font-size:7px;color:var(--t3);letter-spacing:.4px">DONE</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1266,7 +1274,7 @@ let _rType='rest',_rFeel=0,_gAtt=false,_gSType='',_gFeel=0,_sqFeel=0,_enFeel=0,_
 let _activeTrainTab='run';
 
 // ═══ DATA ═══
-function today(){ return new Date().toISOString().split('T')[0] }
+function today(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0') }
 function getLog(){ return JSON.parse(localStorage.getItem('rr_log')||'{}') }
 function setLog(l){ localStorage.setItem('rr_log',JSON.stringify(l)) }
 function getDay(d){ return getLog()[d]||{} }
@@ -1387,14 +1395,26 @@ function renderHome(){
   document.getElementById('cweek').textContent='Week '+wk+' of 19';
   document.getElementById('cpct').textContent=Math.round(pct*100)+'%';
   document.getElementById('cbar').style.width=(pct*100)+'%';
-  document.getElementById('cring').style.strokeDashoffset=(213.6-(pct*213.6));
+  document.getElementById('cring').style.strokeDashoffset=(144.5-(pct*144.5));
   const phase=getCurrentPhase();
-  const pb=document.getElementById('phase-badge');
-  pb.textContent=phase.short;
-  pb.style.background=phase.col+'20';
-  pb.style.borderColor=phase.col+'44';
-  pb.style.color=phase.col;
-  pb.className='badge';
+  const phHdr=document.getElementById('phase-name-hdr');
+  phHdr.textContent=phase.name;
+  phHdr.style.color=phase.col;
+  // phase days remaining + week within phase
+  let phaseDaysRem='—', phaseWeekLbl='';
+  if(phase.end){
+    const phEnd=new Date(phase.end+'T00:00:00');
+    phaseDaysRem=Math.max(0,Math.ceil((phEnd-now)/86400000));
+  }
+  if(phase.start && phase.end){
+    const phStart=new Date(phase.start+'T00:00:00');
+    const phEnd=new Date(phase.end+'T00:00:00');
+    const totalWks=Math.ceil((phEnd-phStart)/86400000/7);
+    const curWk=Math.min(Math.floor((now-phStart)/86400000/7)+1,totalWks);
+    phaseWeekLbl='Week '+curWk+' of '+totalWks;
+  }
+  document.getElementById('phase-days-rem').textContent=phaseDaysRem;
+  document.getElementById('phase-week-lbl').textContent=phaseWeekLbl;
   // quick stats for _vd
   const w=day.wellness||{};
   document.getElementById('qs-sleep').textContent=w.sleep?.hours?w.sleep.hours+'h':'—';
