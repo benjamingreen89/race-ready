@@ -3706,11 +3706,41 @@ function saveCoachResponse(ws){
   showToast('Response saved ✓');
 }
 
+// ═══ COACH MODE (URL param: ?coach) ═══
+const IS_COACH = new URLSearchParams(window.location.search).has('coach');
+
+function applyCoachMode(){
+  // Hide all nav items except Check In
+  ['home','run','nutrition','wellness','metrics'].forEach(t=>{
+    const ni=document.getElementById('nav-'+t);
+    if(ni) ni.style.display='none';
+  });
+  // Show only the Check-In tab, hide all others
+  TABS.filter(t=>t!=='checkin').forEach(t=>{
+    const el=document.getElementById('tab-'+t);
+    if(el){el.classList.remove('active');el.style.display='none';}
+  });
+  // Add a subtle coach badge to the nav
+  const nav=document.querySelector('.nav');
+  if(nav){
+    const badge=document.createElement('div');
+    badge.style.cssText='position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--accent);font-weight:700;letter-spacing:.8px;text-transform:uppercase;white-space:nowrap;pointer-events:none';
+    badge.textContent='Coach View — Mackie';
+    nav.style.position='fixed';
+    nav.appendChild(badge);
+  }
+  switchTab('checkin');
+}
+
 // ═══ INIT ═══
 renderDayNav();
 _loadFromFirestore().then(() => {
-  renderHome();
-  initWater();
+  if(IS_COACH){
+    applyCoachMode();
+  } else {
+    renderHome();
+    initWater();
+  }
 });
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js');}
 </script>
