@@ -1279,14 +1279,14 @@ const PHASES = [
     rules:['Meal prep every Sunday without exception','Log every single meal — do not guess','Protein target is non-negotiable','Do NOT skip meals when the scale disappoints','7+ hours sleep minimum','2.5–3L water daily','Add 150–200 kcal of carbs on runs 13km+'],
     start:'2026-06-08', end:'2026-08-04', mp:1 },
   { id:2, name:'Build & Burn', short:'Build & Burn', col:'#F59E0B',
-    targets:{cal:1900,pro:180,carb:180,fat:60},
-    longRun:{cal:2100,carb:230},
+    targets:{cal:2100,pro:182,carb:210,fat:62},
+    longRun:{cal:2300,carb:255},
     desc:'Still cutting but now fuelling performance. Long runs building to 16–24km. Target: 15% body fat by end of phase.',
     rules:['Carb load Saturday night for Sunday long runs 13km+','Pre-run meal 60–90 min before long runs','Carry gels for runs over 90 minutes','Recovery meal within 30–45 min post long run','Protein and sleep remain non-negotiable'],
     start:'2026-08-04', end:'2026-09-15', mp:2 },
   { id:3, name:'Peak Load', short:'Peak Load', col:'#818CF8',
-    targets:{cal:2200,pro:170,carb:260,fat:70},
-    longRun:{cal:2500,carb:320},
+    targets:{cal:2500,pro:175,carb:295,fat:73},
+    longRun:{cal:2800,carb:345},
     desc:'Max training volume, max fuel. Body composition is secondary — arrive at race day lean, strong and fuelled.',
     rules:['Carbs are the priority now — eat them','Fuel during runs over 90 min: 30–60g carbs/hr via gels','Recovery meal within 30–45 min of finishing long runs','Practice race day fuelling in training','Sleep is critical at this training load'],
     start:'2026-09-15', end:'2026-09-29', mp:3 },
@@ -1304,10 +1304,14 @@ const ML = {
     breakfast:[
       {name:'Protein Smoothie',desc:'VPA Whey Blend + banana + milk + peanut butter',cal:420,pro:40,carb:38,fat:12,ing:{proteins:['VPA Whey Blend','Full cream milk'],carbs:['Banana','Peanut butter'],pantry:[]}},
       {name:'Protein Oats',desc:'60g oats + 1 scoop VPA + milk + honey',cal:450,pro:42,carb:52,fat:8,ing:{proteins:['VPA Whey Blend','Full cream milk'],carbs:['Rolled oats','Honey'],pantry:['Cinnamon']}},
+      {name:'Tropical Protein Smoothie',desc:'40g MyProtein Vanilla Whey Isolate + frozen banana + frozen mango + Greek yogurt 0% + honey + ice. Blend until smooth.',cal:380,pro:42,carb:46,fat:2,ing:{proteins:['MyProtein Vanilla Whey Isolate (40g)','Greek yogurt 0% fat (100g)'],carbs:['Frozen banana (100g)','Frozen mango (80g)','Honey (3g)'],pantry:['Ice']}},
     ],
     lunch:[
       {name:'High Protein Soup',desc:'Chicken breast or turkey mince, lentils, veg, stock. Batch prep Sunday.',cal:400,pro:45,carb:32,fat:8,ing:{proteins:['Chicken breast (1.5kg)','Turkey mince'],carbs:['Red lentils','Mixed winter veg'],pantry:['Chicken stock cubes']}},
       {name:'Salad Bowl',desc:'Mixed greens, 150g grilled chicken, chickpeas, veg, olive oil dressing',cal:380,pro:45,carb:20,fat:12,ing:{proteins:['Chicken breast (1.5kg)'],carbs:['Mixed salad greens','Chickpeas (can)','Capsicum','Cherry tomatoes'],pantry:['Olive oil','Lemon']}},
+      {name:'Mediterranean Chicken Bowl',desc:'150g grilled chicken breast + hard-boiled egg + mixed greens + cucumber + cherry tomatoes + red onion + corn + avocado + balsamic vinaigrette. Season and grill chicken. Chop veg, combine with greens, top with chicken and egg, drizzle dressing.',cal:485,pro:52,carb:24,fat:16,ing:{proteins:['Chicken breast (150g)','Eggs'],carbs:['Mixed greens (80g)','Cucumber (50g)','Cherry tomatoes (40g)','Red onion (30g)','Corn (40g)','Avocado (20g)'],pantry:['Balsamic vinaigrette (15g)']}},
+      {name:'Chicken & Egg Power Salad',desc:'150g grilled chicken + hard-boiled egg + mixed salad greens + shredded carrot + corn + edamame beans + avocado + Nando\'s Mild Peri Peri Mayo. Grill chicken with salt, pepper, garlic powder. Chop and combine all ingredients. Top with dressing.',cal:485,pro:52,carb:22,fat:18,ing:{proteins:['Chicken breast (150g)','Eggs','Edamame beans (50g)'],carbs:['Mixed salad greens (80g)','Shredded carrot (40g)','Corn (40g)','Avocado (20g)'],pantry:["Nando's Mild Peri Peri Mayo (15g)"]}},
+      {name:'Lamb & Feta Salad Bowl',desc:'140g lean lamb mince + hard-boiled egg + mixed greens + cucumber + cherry tomatoes + red onion + corn + reduced-fat feta + balsamic vinaigrette. Season and cook lamb mince with cumin, paprika and garlic. Assemble salad, top with warm lamb and crumbled feta.',cal:485,pro:48,carb:22,fat:22,ing:{proteins:['Lean lamb mince (140g)','Eggs','Reduced-fat feta (20g)'],carbs:['Mixed greens (90g)','Cucumber (50g)','Cherry tomatoes (40g)','Red onion (30g)','Corn (40g)'],pantry:['Balsamic vinaigrette (15g)','Cumin','Paprika']}},
     ],
     snack:[
       {name:'Protein Water',desc:'MyProtein Clear Whey protein water',cal:90,pro:20,carb:4,fat:0,ing:{proteins:['Protein water (MyProtein)'],carbs:[],pantry:[]}},
@@ -1317,16 +1321,21 @@ const ML = {
       {name:'Slow Cook Casserole',desc:'Beef chuck or chicken thigh, tomatoes, stock, root veg, beans',cal:480,pro:45,carb:30,fat:14,ing:{proteins:['Beef chuck','Chicken thigh (skin off)'],carbs:['Crushed tomatoes (can)','Onion','Garlic','Carrot','Sweet potato','Cannellini beans (can)'],pantry:['Beef stock','Mixed herbs']}},
       {name:'Chicken Stir Fry',desc:'Chicken breast, broccolini, capsicum, bok choy, oyster sauce. ½ cup rice.',cal:450,pro:42,carb:38,fat:10,ing:{proteins:['Chicken breast (1.5kg)'],carbs:['Broccolini','Capsicum','Bok choy','Basmati rice'],pantry:['Oyster sauce','Garlic','Soy sauce']}},
       {name:'Beef Stir Fry',desc:'Lean beef strips, Asian veg, sesame oil, soy, garlic. ½ cup rice.',cal:460,pro:40,carb:36,fat:12,ing:{proteins:['Lean beef strips'],carbs:['Asian stir fry veg mix','Basmati rice'],pantry:['Sesame oil','Soy sauce','Garlic']}},
+      {name:'Chicken Pasta Primavera',desc:'140g chicken breast + 50g pasta (dry) + broccoli + bell peppers + zucchini + cherry tomatoes + garlic + olive oil + fresh basil. Cook pasta. Dice and cook chicken. Sauté veg with garlic. Combine and season with basil.',cal:550,pro:48,carb:52,fat:12,ing:{proteins:['Chicken breast (140g)'],carbs:['Pasta (50g dry)','Broccoli (100g)','Bell peppers (80g)','Zucchini (60g)','Cherry tomatoes (40g)'],pantry:['Olive oil','Garlic','Fresh basil','Salt and pepper']}},
     ],
   },
   1:{ // The Forge
     breakfast:[
       {name:'Protein Smoothie',desc:'VPA Whey Blend + banana + milk + peanut butter + spinach',cal:420,pro:40,carb:36,fat:12,ing:{proteins:['VPA Whey Blend','Full cream milk'],carbs:['Banana','Peanut butter','Baby spinach'],pantry:[]}},
       {name:'Protein Oats',desc:'60g oats + 1 scoop VPA + milk + cinnamon or honey',cal:450,pro:42,carb:50,fat:8,ing:{proteins:['VPA Whey Blend','Full cream milk'],carbs:['Rolled oats','Honey'],pantry:['Cinnamon']}},
+      {name:'Tropical Protein Smoothie',desc:'40g MyProtein Vanilla Whey Isolate + frozen banana + frozen mango + Greek yogurt 0% + honey + ice. Blend until smooth.',cal:380,pro:42,carb:46,fat:2,ing:{proteins:['MyProtein Vanilla Whey Isolate (40g)','Greek yogurt 0% fat (100g)'],carbs:['Frozen banana (100g)','Frozen mango (80g)','Honey (3g)'],pantry:['Ice']}},
     ],
     lunch:[
       {name:'High Protein Soup',desc:'Chicken or turkey mince, lentils, chickpeas, hearty winter veg, stock. Batch prep.',cal:400,pro:45,carb:30,fat:8,ing:{proteins:['Chicken breast (1.5kg)','Turkey mince'],carbs:['Red lentils','Chickpeas (can)','Mixed winter veg'],pantry:['Chicken stock cubes']}},
       {name:'Salad Bowl',desc:'Mixed greens, 150g grilled chicken or tuna, chickpeas, veg, light dressing',cal:380,pro:45,carb:18,fat:10,ing:{proteins:['Chicken breast (1.5kg)','Tuna cans'],carbs:['Mixed salad greens','Chickpeas (can)','Capsicum','Cherry tomatoes'],pantry:['Olive oil','Lemon']}},
+      {name:'Mediterranean Chicken Bowl',desc:'150g grilled chicken breast + hard-boiled egg + mixed greens + cucumber + cherry tomatoes + red onion + corn + avocado + balsamic vinaigrette. Season and grill chicken. Chop veg, combine with greens, top with chicken and egg, drizzle dressing.',cal:485,pro:52,carb:24,fat:16,ing:{proteins:['Chicken breast (150g)','Eggs'],carbs:['Mixed greens (80g)','Cucumber (50g)','Cherry tomatoes (40g)','Red onion (30g)','Corn (40g)','Avocado (20g)'],pantry:['Balsamic vinaigrette (15g)']}},
+      {name:'Chicken & Egg Power Salad',desc:'150g grilled chicken + hard-boiled egg + mixed salad greens + shredded carrot + corn + edamame beans + avocado + Nando\'s Mild Peri Peri Mayo. Grill chicken with salt, pepper, garlic powder. Chop and combine all ingredients. Top with dressing.',cal:485,pro:52,carb:22,fat:18,ing:{proteins:['Chicken breast (150g)','Eggs','Edamame beans (50g)'],carbs:['Mixed salad greens (80g)','Shredded carrot (40g)','Corn (40g)','Avocado (20g)'],pantry:["Nando's Mild Peri Peri Mayo (15g)"]}},
+      {name:'Lamb & Feta Salad Bowl',desc:'140g lean lamb mince + hard-boiled egg + mixed greens + cucumber + cherry tomatoes + red onion + corn + reduced-fat feta + balsamic vinaigrette. Season and cook lamb mince with cumin, paprika and garlic. Assemble salad, top with warm lamb and crumbled feta.',cal:485,pro:48,carb:22,fat:22,ing:{proteins:['Lean lamb mince (140g)','Eggs','Reduced-fat feta (20g)'],carbs:['Mixed greens (90g)','Cucumber (50g)','Cherry tomatoes (40g)','Red onion (30g)','Corn (40g)'],pantry:['Balsamic vinaigrette (15g)','Cumin','Paprika']}},
     ],
     snack:[
       {name:'Protein Water',desc:'Afternoon only. Best option for The Forge.',cal:90,pro:20,carb:4,fat:0,ing:{proteins:['Protein water (MyProtein)'],carbs:[],pantry:[]}},
@@ -1340,6 +1349,7 @@ const ML = {
       {name:'Beef Stir Fry',desc:'Lean beef strips, Asian veg, sesame oil, soy, garlic. ½ cup rice.',cal:460,pro:40,carb:34,fat:12,ing:{proteins:['Lean beef strips'],carbs:['Asian stir fry veg mix','Basmati rice'],pantry:['Sesame oil','Soy sauce','Garlic']}},
       {name:'Pasta Night',desc:'Lean beef or turkey bolognese, wholemeal pasta (60–70g dry), zucchini grated in',cal:500,pro:42,carb:52,fat:12,ing:{proteins:['Lean beef mince','Turkey mince'],carbs:['Wholemeal pasta','Zucchini'],pantry:['Pasta sauce (jar)','Garlic','Parmesan']}},
       {name:'Baked Salmon',desc:'Salmon fillet, roast veg: zucchini, capsicum, broccolini',cal:450,pro:44,carb:14,fat:22,ing:{proteins:['Salmon fillets'],carbs:['Zucchini','Capsicum','Broccolini'],pantry:['Olive oil','Lemon','Mixed herbs']}},
+      {name:'Chicken Pasta Primavera',desc:'140g chicken breast + 50g pasta (dry) + broccoli + bell peppers + zucchini + cherry tomatoes + garlic + olive oil + fresh basil. Cook pasta. Dice and cook chicken. Sauté veg with garlic. Combine and season with basil.',cal:550,pro:48,carb:52,fat:12,ing:{proteins:['Chicken breast (140g)'],carbs:['Pasta (50g dry)','Broccoli (100g)','Bell peppers (80g)','Zucchini (60g)','Cherry tomatoes (40g)'],pantry:['Olive oil','Garlic','Fresh basil','Salt and pepper']}},
     ],
   },
   2:{ // Build & Burn
