@@ -724,8 +724,12 @@ body::-webkit-scrollbar{display:none}
     <!-- Week grid -->
     <div class="sec" style="padding-top:0">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div class="lbl" style="margin-bottom:0" id="mp-week-lbl">Week of —</div>
-        <div style="font-size:11px;color:var(--t3)" id="mp-phase-lbl"></div>
+        <button onclick="navMpWeek(-1)" style="background:transparent;border:none;font-size:22px;color:var(--t2);cursor:pointer;padding:0 6px;line-height:1;font-family:var(--fb)">‹</button>
+        <div style="text-align:center;flex:1">
+          <div class="lbl" style="margin-bottom:0" id="mp-week-lbl">Week of —</div>
+          <div style="font-size:11px;color:var(--t3)" id="mp-phase-lbl"></div>
+        </div>
+        <button onclick="navMpWeek(1)" style="background:transparent;border:none;font-size:22px;color:var(--t2);cursor:pointer;padding:0 6px;line-height:1;font-family:var(--fb)">›</button>
       </div>
       <div class="mp-week" id="mp-grid"></div>
     </div>
@@ -748,11 +752,15 @@ body::-webkit-scrollbar{display:none}
   <!-- ── SHOPPING ── -->
   <div id="nut-shop" style="display:none">
     <div class="sec" style="padding-top:0">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <div class="lbl" style="margin-bottom:0">🛒 Shopping List</div>
         <button onclick="clearShoppingChecks()" style="background:transparent;border:none;font-size:12px;color:var(--t3);cursor:pointer;font-family:var(--fb)">Clear ticks</button>
       </div>
-      <div style="font-size:12px;color:var(--t3);margin-bottom:14px" id="shop-week-note">Based on meals planned for this week</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <button onclick="navMpWeek(-1)" style="background:transparent;border:none;font-size:20px;color:var(--t2);cursor:pointer;padding:0 4px;line-height:1;font-family:var(--fb)">‹</button>
+        <div style="font-size:12px;color:var(--t3);text-align:center;flex:1" id="shop-week-note">Based on meals planned for this week</div>
+        <button onclick="navMpWeek(1)" style="background:transparent;border:none;font-size:20px;color:var(--t2);cursor:pointer;padding:0 4px;line-height:1;font-family:var(--fb)">›</button>
+      </div>
       <div id="shop-list">
         <div style="color:var(--t3);font-size:13px;text-align:center;padding:20px 0">Plan your meals first to generate the shopping list</div>
       </div>
@@ -1277,13 +1285,13 @@ const PHASES = [
     longRun:{cal:1900,carb:180},
     desc:'Eight weeks of disciplined eating. BFT six days plus your runs. You have done it before — now do it better.',
     rules:['Meal prep every Sunday without exception','Log every single meal — do not guess','Protein target is non-negotiable','Do NOT skip meals when the scale disappoints','7+ hours sleep minimum','2.5–3L water daily','Add 150–200 kcal of carbs on runs 13km+'],
-    start:'2026-06-08', end:'2026-08-04', mp:1 },
+    start:'2026-06-08', end:'2026-08-03', mp:1 },
   { id:2, name:'Build & Burn', short:'Build & Burn', col:'#F59E0B',
     targets:{cal:2100,pro:182,carb:210,fat:62},
     longRun:{cal:2300,carb:255},
     desc:'Still cutting but now fuelling performance. Long runs building to 16–24km. Target: 15% body fat by end of phase.',
     rules:['Carb load Saturday night for Sunday long runs 13km+','Pre-run meal 60–90 min before long runs','Carry gels for runs over 90 minutes','Recovery meal within 30–45 min post long run','Protein and sleep remain non-negotiable'],
-    start:'2026-08-04', end:'2026-09-15', mp:2 },
+    start:'2026-08-03', end:'2026-09-15', mp:2 },
   { id:3, name:'Peak Load', short:'Peak Load', col:'#818CF8',
     targets:{cal:2500,pro:175,carb:295,fat:73},
     longRun:{cal:2800,carb:345},
@@ -1657,8 +1665,8 @@ function renderPhaseMilestones(){
   const el=document.getElementById('phase-milestones'); if(!el) return;
   const now=new Date();
   const milestones=[
-    {name:'The Forge',dates:'8 Jun → 3 Aug',col:'#00DF81',start:'2026-06-08',end:'2026-08-04',desc:'Aggressive cut · high protein · BFT every day'},
-    {name:'Build & Burn',dates:'4 Aug → 14 Sep',col:'#F59E0B',start:'2026-08-04',end:'2026-09-15',desc:'Still cutting · fuelling long runs to 24km'},
+    {name:'The Forge',dates:'8 Jun → 2 Aug',col:'#00DF81',start:'2026-06-08',end:'2026-08-03',desc:'Aggressive cut · high protein · BFT every day'},
+    {name:'Build & Burn',dates:'3 Aug → 14 Sep',col:'#F59E0B',start:'2026-08-03',end:'2026-09-15',desc:'Still cutting · fuelling long runs to 24km'},
     {name:'Peak Load',dates:'15 Sep → 28 Sep',col:'#818CF8',start:'2026-09-15',end:'2026-09-29',desc:'Max training · max fuel · 32km peak run'},
     {name:'Race Ready',dates:'29 Sep → 11 Oct',col:'#EF4444',start:'2026-09-29',end:'2026-10-11',desc:'Taper · carb load · execute on race day'},
   ];
@@ -1942,8 +1950,14 @@ function setNutTab(t){
     document.getElementById('nst-'+id).className='stb'+(id===t?' active':'');
   });
   if(t==='log') renderNutLog();
-  if(t==='plan') renderMealPlan();
-  if(t==='shop') renderShoppingList();
+  if(t==='plan'){
+    if(!_mpPlanWeek){const nw=new Date();nw.setDate(nw.getDate()+7);_mpPlanWeek=getWeekStart(nw.toISOString().split('T')[0]);}
+    renderMealPlan();
+  }
+  if(t==='shop'){
+    if(!_mpPlanWeek){const nw=new Date();nw.setDate(nw.getDate()+7);_mpPlanWeek=getWeekStart(nw.toISOString().split('T')[0]);}
+    renderShoppingList();
+  }
   if(t==='menu') renderMenu();
 }
 
@@ -2239,12 +2253,21 @@ function getWeekStart(ds){
 const MSLOTS=['breakfast','lunch','snack','dinner'];
 const MSLOT_EMOJI={breakfast:'🌅',lunch:'☀️',snack:'🍎',dinner:'🌙'};
 
-let _mpSelDay=null,_mpPickSlot=null,_swapWk=null,_swapRI=null;
+let _mpSelDay=null,_mpPickSlot=null,_swapWk=null,_swapRI=null,_mpPlanWeek=null;
+function navMpWeek(dir){
+  if(!_mpPlanWeek) _mpPlanWeek=getWeekStart(today());
+  const d=new Date(_mpPlanWeek+'T12:00:00'); d.setDate(d.getDate()+dir*7);
+  _mpPlanWeek=d.toISOString().split('T')[0];
+  if(_nutTab==='shop') renderShoppingList(); else renderMealPlan();
+}
 
 function renderMealPlan(){
-  const ws=getWeekStart(_vd); const phase=getCurrentPhase(_vd); const plan=getMealPlan();
+  if(!_mpPlanWeek){const nw=new Date();nw.setDate(nw.getDate()+7);_mpPlanWeek=getWeekStart(nw.toISOString().split('T')[0]);}
+  const ws=_mpPlanWeek; const phase=getCurrentPhase(ws); const plan=getMealPlan();
   const d=new Date(ws+'T12:00:00');
-  document.getElementById('mp-week-lbl').textContent='Week of '+d.toLocaleDateString('en-AU',{day:'numeric',month:'short'});
+  const todayWs=getWeekStart(today()); const nextWs=(()=>{const x=new Date(todayWs+'T12:00:00');x.setDate(x.getDate()+7);return x.toISOString().split('T')[0];})();
+  const wkTag=ws===todayWs?'This week':ws===nextWs?'Next week':'w/c';
+  document.getElementById('mp-week-lbl').textContent=wkTag+(wkTag==='w/c'?'':' —')+' '+d.toLocaleDateString('en-AU',{day:'numeric',month:'short'});
   document.getElementById('mp-phase-lbl').textContent=phase.name;
   // Runna strip for this week
   renderRunStrip(ws);
@@ -2425,13 +2448,33 @@ function drawTodayMealsLog(){
 function getShoppingChecks(){return JSON.parse(localStorage.getItem('rr_shopping')||'{}')}
 function saveShoppingChecks(d){localStorage.setItem('rr_shopping',JSON.stringify(d))}
 
+function parseIng(str){
+  const m=str.match(/^(.+?)\s*\((\d+(?:\.\d+)?)\s*(g|ml|kg|L|tbsp|tsp)\)/i);
+  if(m) return {label:m[1].trim(),qty:parseFloat(m[2]),unit:m[3]};
+  return {label:str,qty:0,unit:null};
+}
+function addIng(cat,str){
+  const p=parseIng(str); const key=p.label.toLowerCase();
+  if(!cat[key]) cat[key]={label:p.label,total:0,unit:p.unit,count:0};
+  cat[key].total+=p.qty; cat[key].count++;
+}
+function fmtIng(item){
+  if(item.unit){
+    const t=Math.round(item.total*10)/10;
+    return item.label+' ('+t+item.unit+')';
+  }
+  if(item.count>1) return item.label+' \xd7 '+item.count;
+  return item.label;
+}
 function renderShoppingList(){
-  const ws=getWeekStart(_vd); const plan=getMealPlan(); const phase=getCurrentPhase(_vd);
+  if(!_mpPlanWeek){const nw=new Date();nw.setDate(nw.getDate()+7);_mpPlanWeek=getWeekStart(nw.toISOString().split('T')[0]);}
+  const ws=_mpPlanWeek; const plan=getMealPlan(); const phase=getCurrentPhase(ws);
   const d=new Date(ws+'T12:00:00');
+  const todayWs_=getWeekStart(today()); const nextWs_=(()=>{const x=new Date(todayWs_+'T12:00:00');x.setDate(x.getDate()+7);return x.toISOString().split('T')[0];})();
+  const wkTag_=ws===todayWs_?'This week':ws===nextWs_?'Next week':'w/c';
   document.getElementById('shop-week-note').textContent=
-    'Based on meals planned for week of '+d.toLocaleDateString('en-AU',{day:'numeric',month:'short'});
-  // Collect all ingredients from planned meals this week
-  const cats={proteins:new Set(),carbs:new Set(),pantry:new Set()};
+    wkTag_+(wkTag_==='w/c'?'':' —')+' '+d.toLocaleDateString('en-AU',{day:'numeric',month:'short'});
+  const cats={proteins:{},carbs:{},pantry:{}};
   for(let i=0;i<7;i++){
     const dd=new Date(ws+'T12:00:00'); dd.setDate(dd.getDate()+i);
     const ds=dd.toISOString().split('T')[0];
@@ -2440,16 +2483,16 @@ function renderShoppingList(){
       if(dayPlan[slot]){
         const m=getMealByName(phase.mp,slot,dayPlan[slot]);
         if(m&&m.ing){
-          m.ing.proteins.forEach(x=>cats.proteins.add(x));
-          m.ing.carbs.forEach(x=>cats.carbs.add(x));
-          m.ing.pantry.forEach(x=>cats.pantry.add(x));
+          m.ing.proteins.forEach(x=>addIng(cats.proteins,x));
+          m.ing.carbs.forEach(x=>addIng(cats.carbs,x));
+          m.ing.pantry.forEach(x=>addIng(cats.pantry,x));
         }
       }
     });
   }
   const checks=getShoppingChecks();
   const el=document.getElementById('shop-list');
-  if(!cats.proteins.size&&!cats.carbs.size&&!cats.pantry.size){
+  if(!Object.keys(cats.proteins).length&&!Object.keys(cats.carbs).length&&!Object.keys(cats.pantry).length){
     el.innerHTML='<div style="color:var(--t3);font-size:13px;text-align:center;padding:20px 0">Plan your meals first to generate the shopping list</div>';
     return;
   }
@@ -2458,15 +2501,18 @@ function renderShoppingList(){
     {key:'carbs',label:'🥦 Carbs & Veg',items:cats.carbs},
     {key:'pantry',label:'🧴 Pantry & Extras',items:cats.pantry},
   ];
-  el.innerHTML=sections.filter(s=>s.items.size>0).map(s=>`
+  el.innerHTML=sections.filter(s=>Object.keys(s.items).length>0).map(s=>`
     <div class="shop-cat">
       <div class="shop-cat-hdr">${s.label}</div>
       <div class="card" style="padding:0 16px">
-        ${[...s.items].sort().map(item=>`
-          <div class="shop-item${checks[item]?' done':''}" onclick="toggleShopItem('${item.replace(/'/g,"\\'")}')">
+        ${Object.values(s.items).sort((a,b)=>a.label.localeCompare(b.label)).map(item=>{
+          const display=fmtIng(item);
+          const ck=item.label;
+          return `<div class="shop-item${checks[ck]?' done':''}" onclick="toggleShopItem('${ck.replace(/'/g,"\\'")}')">
             <div class="shop-ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 3.5L3.5 6L9 1" stroke="#000" stroke-width="2" stroke-linecap="round"/></svg></div>
-            <div class="shop-lbl">${item}</div>
-          </div>`).join('')}
+            <div class="shop-lbl">${display}</div>
+          </div>`;
+        }).join('')}
       </div>
     </div>`).join('');
 }
