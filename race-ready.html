@@ -3037,7 +3037,7 @@ function renderCheckinWeekly(){
   const aPro=nutDays?Math.round(pro/nutDays):null;
   const aCarb=nutDays?Math.round(carb/nutDays):null;
   const aFat=nutDays?Math.round(fat/nutDays):null;
-  const aBt=(()=>{const p=bedtimes2.map(s=>{const m=s.match(/(\d+)[.:](\d+)\s*(am|pm)?/i);if(!m)return null;let h=parseInt(m[1]),mn=parseInt(m[2]);const ap=(m[3]||'').toLowerCase();if(ap==='pm'&&h<12)h+=12;if(ap==='am'&&h===12)h=0;let mins=h*60+mn;if(h<12)mins+=1440;return mins;}).filter(v=>v!==null);if(!p.length)return null;const avg=p.reduce((a,b)=>a+b,0)/p.length;const tm=avg%1440;const h=Math.floor(tm/60);const mn=Math.round(tm%60);return(h>12?h-12:h===0?12:h)+':'+(mn+'').padStart(2,'0')+(h>=12?'pm':'am');})();
+  const aBt=(()=>{const p=bedtimes2.map(s=>{const m=s.match(/(\d+)[.:](\d+)\s*(am|pm)?/i);if(!m)return null;let h=parseInt(m[1]),mn=parseInt(m[2]);const ap=(m[3]||'').toLowerCase();if(ap==='pm'&&h<12)h+=12;if(ap==='am'&&h===12)h=0;if(!ap&&h<12)h+=12;let mins=h*60+mn;if(h<12)mins+=1440;return mins;}).filter(v=>v!==null);if(!p.length)return null;const avg=p.reduce((a,b)=>a+b,0)/p.length;const tm=avg%1440;const h=Math.floor(tm/60);const mn=Math.round(tm%60);return(h>12?h-12:h===0?12:h)+':'+(mn+'').padStart(2,'0')+(h>=12?'pm':'am');})();
 
   // mkRow helper (same as coach dash)
   const mkR=(lbl,tgtStr,avgStr,good)=>{const col=good===null?'var(--t2)':good?'var(--accent)':'var(--amber)';const icon=good===null?'':good?'✓':'!';return `<div style="display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04)"><div style="font-size:13px;font-weight:500;color:var(--t1);flex:1">${lbl}</div><div style="font-size:10px;color:var(--t3);white-space:nowrap;margin-right:2px">↦ ${tgtStr}</div><div style="font-size:16px;font-weight:700;color:${col};font-family:var(--fh);min-width:72px;text-align:right">${avgStr}</div><div style="font-size:11px;font-weight:700;color:${col};width:14px;text-align:center;flex-shrink:0">${icon}</div></div>`;};
@@ -3484,7 +3484,7 @@ function renderCoachDash(){
   const aFat=nutDays?Math.round(fat/nutDays):null;
   // Average bedtime
   const aBedtime=(()=>{
-    const parsed=bedtimes.map(s=>{const m=s.match(/(\d+)[.:](\d+)\s*(am|pm)?/i);if(!m)return null;let h=parseInt(m[1]),min=parseInt(m[2]);const ap=(m[3]||'').toLowerCase();if(ap==='pm'&&h<12)h+=12;if(ap==='am'&&h===12)h=0;let mins=h*60+min;if(h<12)mins+=1440;return mins;}).filter(v=>v!==null);
+    const parsed=bedtimes.map(s=>{const m=s.match(/(\d+)[.:](\d+)\s*(am|pm)?/i);if(!m)return null;let h=parseInt(m[1]),min=parseInt(m[2]);const ap=(m[3]||'').toLowerCase();if(ap==='pm'&&h<12)h+=12;if(ap==='am'&&h===12)h=0;if(!ap&&h<12)h+=12;let mins=h*60+min;if(h<12)mins+=1440;return mins;}).filter(v=>v!==null);
     if(!parsed.length) return null;
     const avg=parsed.reduce((a,b)=>a+b,0)/parsed.length;
     const tm=avg%1440; const h=Math.floor(tm/60); const m=Math.round(tm%60);
