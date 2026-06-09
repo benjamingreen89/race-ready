@@ -1,0 +1,35 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      ".firebaserc",
+      "**/.*",
+      "archive/**",
+      "*.pdf",
+      "*.docx",
+      "*.jsx",
+      "*.JPG",
+      "*.docx",
+      "nutrition-plan-app.jsx",
+      "Race Ready Design System.docx",
+      "Race Ready Plan - Coach Overview.docx",
+      "Nike Melbourne Marathon Plan Overview.pdf",
+      "Screenshot*",
+      "Colour scheme.JPG",
+      "Dashboard example.JPG",
+      "Design guide.png",
+      "Evolt 31 Mar 26.pdf",
+      "Evolt.png"
+    ],
+    "rewrites": [
+      { "source": "/", "destination": "/race-ready.html" }
+    ],
+    "headers": [
+      {
+        "source": "sw.js",
+        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+      }
+    ]
+  }
+}
