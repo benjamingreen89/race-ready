@@ -1284,13 +1284,13 @@ const PHASES = [
   { id:1, name:'Relight', short:'Relight', col:'#00DF81',
     targets:{cal:2000,pro:190,carb:160,fat:67},
     longRun:{cal:2250,carb:230},
-    desc:'Four weeks to rebuild the base off your 12km and take the biggest bite out of the cut. Hardest deficit of the plan — it happens now, while the long runs are still short.',
+    desc:'Four weeks to rebuild the base off your 12km and take the biggest bite out of the cut. Long runs 7.5 → 20km. Hardest deficit of the plan — it happens now, while the long runs are still short.',
     rules:['Meal prep every Sunday without exception','Log every single meal — do not guess','Protein target is non-negotiable at 190g','Do NOT skip meals when the scale disappoints','7+ hours sleep minimum — the back needs it','2.5–3L water daily','Add 150–200 kcal of carbs on runs 14km+','Back check: stop the run if pain moves from ache to sharp'],
     start:'2026-07-27', end:'2026-08-24', mp:1 },
   { id:2, name:'Build & Burn', short:'Build & Burn', col:'#F59E0B',
     targets:{cal:2200,pro:185,carb:210,fat:68},
     longRun:{cal:2500,carb:285},
-    desc:'The engine room. Long runs climb 22 → 25 → 30km and the deficit eases to protect them. Still losing weight, just not at the expense of Sunday.',
+    desc:'The engine room. Long runs climb 23 → 27 → 32km and the deficit eases to protect them. Still losing weight, just not at the expense of Sunday.',
     rules:['Carb load Saturday night for Sunday long runs 20km+','Pre-run meal 60–90 min before long runs','Carry gels for runs over 90 minutes','Recovery meal within 30–45 min post long run','Practice race-day fuel and kit on every long run','Protein and sleep remain non-negotiable'],
     start:'2026-08-24', end:'2026-09-21', mp:2 },
   { id:3, name:'Peak Load', short:'Peak Load', col:'#818CF8',
@@ -1425,17 +1425,19 @@ const ML = {
 
 // ═══ RUNNA SCHEDULE ═══
 const RUNNA = [
-  {wk:1, start:'2026-07-27',runs:[{day:'thursday',km:6,type:'easy',label:'Easy Return Run'},{day:'sunday',km:14,type:'long',label:'Long Run'}]},
-  {wk:2, start:'2026-08-03',runs:[{day:'thursday',km:7,type:'tempo',label:'Over & Unders'},{day:'sunday',km:16,type:'long',label:'Long Run'}]},
-  {wk:3, start:'2026-08-10',runs:[{day:'thursday',km:8,type:'intervals',label:'1km Repeats'},{day:'sunday',km:19,type:'long',label:'Block Long Run'}]},
-  {wk:4, start:'2026-08-17',runs:[{day:'thursday',km:6,type:'easy',label:'Progressive Run'},{day:'sunday',km:13,type:'long',label:'Down Week Long Run'}]},
-  {wk:5, start:'2026-08-24',runs:[{day:'thursday',km:9,type:'tempo',label:'Tempo 5km'},{day:'sunday',km:22,type:'long',label:'Race Practice Long Run'}]},
-  {wk:6, start:'2026-08-31',runs:[{day:'thursday',km:10,type:'intervals',label:'Mile Repeats'},{day:'sunday',km:25,type:'long',label:'Progressive Long Run'}]},
-  {wk:7, start:'2026-09-07',runs:[{day:'thursday',km:7.5,type:'tempo',label:'On Off Ks'},{day:'sunday',km:16,type:'long',label:'Down Week Long Run'}]},
-  {wk:8, start:'2026-09-14',runs:[{day:'thursday',km:11,type:'easy',label:'Progressive Run'},{day:'sunday',km:30,type:'long',label:'Peak Long Run 🏔️'}]},
-  {wk:9, start:'2026-09-21',runs:[{day:'thursday',km:10,type:'tempo',label:'Tempo · 2km Reps'},{day:'sunday',km:21.1,type:'long',label:'Half Marathon Long Run'}]},
-  {wk:10,start:'2026-09-28',runs:[{day:'thursday',km:8,type:'tempo',label:'Race Pace Blocks'},{day:'sunday',km:14,type:'long',label:'Taper Long Run'}]},
-  {wk:11,start:'2026-10-05',runs:[{day:'wednesday',km:5,type:'easy',label:'Shakeout + Strides'},{day:'sunday',km:42.2,type:'race',label:'Nike Melbourne Marathon 🏁'}]},
+  // Mirrors the Runna plan regenerated 26 Jul 2026 (its weeks 4–14, renumbered 1–11).
+  // Runna weeks 1–3 (6/13/20 Jul) are already complete — wk3 ended with the 12km on 26 Jul.
+  {wk:1, start:'2026-07-27',runs:[{day:'thursday',km:4,type:'tempo',label:'Tempo 2km'},{day:'sunday',km:7.5,type:'long',label:'Long Run'}]},
+  {wk:2, start:'2026-08-03',runs:[{day:'thursday',km:6.4,type:'intervals',label:'Mile Repeats'},{day:'sunday',km:14,type:'long',label:'Race Practice Long Run'}]},
+  {wk:3, start:'2026-08-10',runs:[{day:'thursday',km:7,type:'easy',label:'Progressive Run'},{day:'sunday',km:17,type:'long',label:'Race Practice Long Run'}]},
+  {wk:4, start:'2026-08-17',runs:[{day:'thursday',km:7.5,type:'intervals',label:'Over & Unders 1km'},{day:'sunday',km:20,type:'long',label:'Long Run'}]},
+  {wk:5, start:'2026-08-24',runs:[{day:'thursday',km:8,type:'intervals',label:'800m Repeats'},{day:'sunday',km:23,type:'long',label:'Block Long Run'}]},
+  {wk:6, start:'2026-08-31',runs:[{day:'thursday',km:6,type:'tempo',label:'Tempo 3km'},{day:'sunday',km:11,type:'long',label:'Down Week Long Run'}]},
+  {wk:7, start:'2026-09-07',runs:[{day:'thursday',km:8,type:'tempo',label:'On Off Ks'},{day:'sunday',km:27,type:'long',label:'Race Practice Long Run'}]},
+  {wk:8, start:'2026-09-14',runs:[{day:'thursday',km:8,type:'intervals',label:'1km Repeats'},{day:'sunday',km:32,type:'long',label:'Peak Long Run 🏔️'}]},
+  {wk:9, start:'2026-09-21',runs:[{day:'thursday',km:7,type:'tempo',label:'Tempo 4km'},{day:'sunday',km:21.1,type:'long',label:'Half Marathon Long Run'}]},
+  {wk:10,start:'2026-09-28',runs:[{day:'thursday',km:6,type:'intervals',label:'Rolling 300s'},{day:'sunday',km:13,type:'long',label:'Taper Long Run'}]},
+  {wk:11,start:'2026-10-05',runs:[{day:'thursday',km:6,type:'easy',label:'Race Pace Fartlek'},{day:'sunday',km:42.2,type:'race',label:'Nike Melbourne Marathon 🏁'}]},
 ];
 const DAY_OFF={monday:0,tuesday:1,wednesday:2,thursday:3,friday:4,saturday:5,sunday:6};
 function runDateFor(weekStart,day){const d=new Date(weekStart+'T12:00:00');d.setDate(d.getDate()+DAY_OFF[day]);return d.toISOString().split('T')[0]}
@@ -1677,8 +1679,8 @@ function renderPhaseMilestones(){
   const el=document.getElementById('phase-milestones'); if(!el) return;
   const now=new Date();
   const milestones=[
-    {name:'Relight',dates:'27 Jul → 23 Aug',col:'#00DF81',start:'2026-07-27',end:'2026-08-24',desc:'Rebuild base · hardest cut · long runs 14→19km'},
-    {name:'Build & Burn',dates:'24 Aug → 20 Sep',col:'#F59E0B',start:'2026-08-24',end:'2026-09-21',desc:'Deficit eases · long runs 22→30km'},
+    {name:'Relight',dates:'27 Jul → 23 Aug',col:'#00DF81',start:'2026-07-27',end:'2026-08-24',desc:'Rebuild base · hardest cut · long runs 7.5→20km'},
+    {name:'Build & Burn',dates:'24 Aug → 20 Sep',col:'#F59E0B',start:'2026-08-24',end:'2026-09-21',desc:'Deficit eases · long runs 23→32km'},
     {name:'Peak Load',dates:'21 Sep → 4 Oct',col:'#818CF8',start:'2026-09-21',end:'2026-10-05',desc:'Taper begins · max fuel · recover hard'},
     {name:'Race Ready',dates:'5 Oct → 11 Oct',col:'#EF4444',start:'2026-10-05',end:'2026-10-11',desc:'Carb load · execute on race day'},
   ];
