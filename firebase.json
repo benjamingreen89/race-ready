@@ -17,7 +17,8 @@
         "Form App design",
         "Screenshot*",
         "Design guide.png",
-        "Evolt.png"
+        "Evolt.png",
+        "icon - transparent.png"
       ],
       "rewrites": [
         { "source": "/", "destination": "/form.html" }
@@ -50,7 +51,8 @@
         "Form App design",
         "Screenshot*",
         "Design guide.png",
-        "Evolt.png"
+        "Evolt.png",
+        "icon - transparent.png"
       ],
       "redirects": [
         { "source": "/", "destination": "https://formhq.web.app", "type": 301 },
