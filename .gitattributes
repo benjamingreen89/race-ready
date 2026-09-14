@@ -1,0 +1,16 @@
+# Binary design assets. Without these, git's text heuristic can misread a
+# file (the Form design system PDF is detected as text) and line-ending
+# conversion on Windows will corrupt it on checkout.
+*.pdf   binary
+*.docx  binary
+*.png   binary
+*.PNG   binary
+*.jpg   binary
+*.jpeg  binary
+*.JPG   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
+
+# Design mockup exported without a file extension.
+"Form App design" binary

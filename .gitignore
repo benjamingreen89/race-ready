@@ -1,0 +1,12 @@
+# This repository is PUBLIC. Anything committed here is world-readable
+# and stays in git history even if deleted later.
+
+# Personal health data — Evolt 360 body scans carry name, age, height,
+# weight, body fat, visceral fat and BMR. Never commit these.
+Evolt*.pdf
+Evolt*.png
+Evolt*.PNG
+
+# Local tooling and caches
+.firebase/
+.claude/
