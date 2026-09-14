@@ -1,34 +1,67 @@
 {
-  "hosting": {
-    "public": ".",
-    "ignore": [
-      "firebase.json",
-      ".firebaserc",
-      "**/.*",
-      "archive/**",
-      "Form/**",
-      "*.pdf",
-      "*.docx",
-      "*.jsx",
-      "*.JPG",
-      "IMG_*.PNG",
-      "Form App design",
-      "Screenshot*",
-      "Design guide.png",
-      "Evolt.png"
-    ],
-    "rewrites": [
-      { "source": "/", "destination": "/form.html" }
-    ],
-    "headers": [
-      {
-        "source": "form-sw.js",
-        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
-      },
-      {
-        "source": "sw.js",
-        "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "site": "formhq",
+      "public": ".",
+      "ignore": [
+        "firebase.json",
+        ".firebaserc",
+        "**/.*",
+        "archive/**",
+        "Form/**",
+        "*.pdf",
+        "*.docx",
+        "*.jsx",
+        "*.JPG",
+        "IMG_*.PNG",
+        "Form App design",
+        "Screenshot*",
+        "Design guide.png",
+        "Evolt.png"
+      ],
+      "rewrites": [
+        { "source": "/", "destination": "/form.html" }
+      ],
+      "headers": [
+        {
+          "source": "form-sw.js",
+          "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+        },
+        {
+          "source": "sw.js",
+          "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+        }
+      ]
+    },
+    {
+      "site": "race-ready-3ad33",
+      "public": ".",
+      "ignore": [
+        "firebase.json",
+        ".firebaserc",
+        "**/.*",
+        "archive/**",
+        "Form/**",
+        "*.pdf",
+        "*.docx",
+        "*.jsx",
+        "*.JPG",
+        "IMG_*.PNG",
+        "Form App design",
+        "Screenshot*",
+        "Design guide.png",
+        "Evolt.png"
+      ],
+      "redirects": [
+        { "source": "/", "destination": "https://formhq.web.app", "type": 301 },
+        { "source": "/form.html", "destination": "https://formhq.web.app", "type": 301 }
+      ],
+      "headers": [
+        {
+          "source": "sw.js",
+          "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+        }
+      ]
+    }
+  ]
 }
