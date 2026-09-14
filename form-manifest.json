@@ -1,0 +1,16 @@
+{
+  "name": "Form",
+  "short_name": "Form",
+  "description": "Your state. Your progress. A 12-week health and fitness reset.",
+  "start_url": "./form.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F6F7F4",
+  "theme_color": "#F6F7F4",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "form-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "form-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "form-icon-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
