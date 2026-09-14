@@ -266,6 +266,29 @@ textarea{min-height:96px;resize:vertical;width:100%}
 .chk[aria-checked=true] .chk-t{color:var(--t2)}
 .chk-m{display:block;font-size:13px;line-height:18px;color:var(--t3);margin-top:2px}
 
+/* ── Auto-ticked checklist rows ── */
+.chk-auto{cursor:default}
+.chk-auto[aria-checked=true] .chk-b{background:var(--green);border-color:var(--green)}
+.chk-auto[aria-checked=false] .chk-b{border-style:dashed;border-color:var(--mist)}
+
+/* ── BFT session type pills ── */
+.types{display:flex;flex-wrap:wrap;gap:8px}
+.types button{
+  display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 14px;
+  border:1px solid var(--mist);background:#fff;border-radius:999px;
+  font-family:var(--font);font-size:14px;font-weight:600;color:var(--t2);cursor:pointer;
+  transition:all var(--mo);-webkit-tap-highlight-color:transparent
+}
+.types button[aria-pressed=true]{background:var(--green);border-color:var(--green);color:var(--ink)}
+.types button .tem{font-size:16px;line-height:1}
+
+/* ── Movement sub-blocks ── */
+.mblock{border:1px solid var(--mist);border-radius:var(--r-ctrl);padding:16px;background:#fff;margin-bottom:12px}
+.mblock-h{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.mblock-h .mi{width:32px;height:32px;flex:0 0 auto;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.mblock-h h3{font-size:16px;font-weight:600}
+.mblock .f:last-child{margin-bottom:0}
+
 /* ── Progress ── */
 .bar{height:8px;background:var(--mist);border-radius:999px;overflow:hidden}
 .bar-f{height:100%;border-radius:999px;background:var(--green);transition:width var(--mo)}
@@ -359,6 +382,30 @@ textarea{min-height:96px;resize:vertical;width:100%}
 .brand svg{height:26px;width:auto;display:block}
 .brand-w{font-size:23px;font-weight:700;letter-spacing:-.5px}
 
+/* ── Coach: per-day detail ── */
+.cday{background:#fff;border:1px solid var(--mist);border-radius:var(--r-card);padding:16px 18px;margin-bottom:10px}
+.cday.future{opacity:.45}
+.cday-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:15px;font-weight:700;margin-bottom:2px}
+.cday-h .cday-n{font-size:12px;font-weight:600;color:var(--t3);white-space:nowrap}
+.cday-s{font-size:12px;line-height:16px;font-weight:700;color:var(--t3);letter-spacing:.3px;text-transform:uppercase;margin:14px 0 7px}
+.cday-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;line-height:19px;background:var(--cloud);border-radius:10px;padding:9px 12px}
+.cday-grid{display:grid;gap:6px}
+.cday-g3{grid-template-columns:repeat(3,1fr)}
+.cday-g4{grid-template-columns:repeat(4,1fr)}
+.cday-c{background:var(--cloud);border-radius:10px;padding:9px 6px;text-align:center}
+.cday-c .v{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
+.cday-c .l{font-size:11px;line-height:15px;color:var(--t3);margin-top:2px}
+.cday-note{font-size:13px;line-height:20px;color:var(--t2);background:var(--cloud);border-radius:10px;padding:10px 12px;white-space:pre-wrap}
+.ctrend{font-size:12px;font-weight:700}
+/* Two lines: name + actual above, target + verdict below. Four columns on
+   one line overflowed at 375px once a label wrapped. */
+.crow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:11px 0;border-bottom:1px solid var(--mist)}
+.crow:last-child{border-bottom:none}
+.crow .cl{font-size:14px;font-weight:600;min-width:0}
+.crow .cv{font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.crow .ct{font-size:12px;color:var(--t3)}
+.crow .cw{font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
+
 /* ── Coach ── */
 .coach-bar{display:flex;align-items:center;gap:10px;margin:12px var(--inset) 0;padding:10px 16px;background:rgba(74,140,240,.14);border:1px solid rgba(74,140,240,.4);border-radius:var(--r-ctrl);font-size:14px;font-weight:600;color:var(--training-ink)}
 
@@ -406,6 +453,9 @@ textarea{min-height:96px;resize:vertical;width:100%}
   <path d="M3 17.2 8.6 11.6l3.4 3.4L21 6.6"/><path d="M15.4 6.6H21v5.6"/></g>
 <g id="i-moon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <path d="M20.2 14.6A8.6 8.6 0 0 1 9.4 3.8a8.6 8.6 0 1 0 10.8 10.8Z"/></g>
+<g id="i-run" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="15.2" cy="4.4" r="2"/><path d="M8.4 21.2l2.6-5.8-3-2.6 1.2-5 3.8-1.4 2.6 3.4 3 1.2"/>
+  <path d="m11 15.4 3.4 2.4 1.2 3.4"/><path d="M9.2 8.4 5.4 9.8 3.8 13.6"/><path d="M3 17.6h3.4"/><path d="M2 14h2"/></g>
 <g id="i-walk" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="13.4" cy="4.4" r="2"/><path d="M10.6 21l1.8-5.4-2.4-2.2.9-4.6 3.5-1.2 2.6 3 2.8 1"/>
   <path d="m12.4 15.6 2.8 2.2.9 3.2"/><path d="M9.4 8.8 6.6 10l-1.4 3.4"/></g>
@@ -518,15 +568,8 @@ textarea{min-height:96px;resize:vertical;width:100%}
       </div>
       <div id="bft-detail">
         <div class="f">
-          <label class="f-l" for="tr-type">Session type</label>
-          <div class="f-w">
-            <select id="tr-type">
-              <option value="">Choose a session</option>
-              <option>Strength</option><option>Cardio</option><option>Progress</option>
-              <option>Sweat</option><option>Athletic</option><option>Other</option>
-            </select>
-            <span class="f-chev"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><use href="#i-chev"/></svg></span>
-          </div>
+          <span class="f-l" id="l-type">Session type</span>
+          <div class="types" role="group" aria-labelledby="l-type" id="bft-types"></div>
         </div>
         <div class="f">
           <span class="f-l" id="l-trf">How did it feel?</span>
@@ -544,18 +587,45 @@ textarea{min-height:96px;resize:vertical;width:100%}
 
   <!-- Movement -->
   <section class="sec">
-    <h2 class="t-sec" style="margin-bottom:12px">Daily movement</h2>
+    <h2 class="t-sec" style="margin-bottom:12px">Movement</h2>
     <div class="card">
-      <div class="f-2">
-        <div class="f">
-          <label class="f-l" for="mv-dur">Duration</label>
-          <div class="f-w has-u"><input type="number" id="mv-dur" inputmode="numeric" min="0" max="600" placeholder="0"><span class="f-u">min</span></div>
+      <p class="t-meta" style="margin-bottom:14px">Log a walk, a run, or both. Leave a block empty if you didn't do it.</p>
+
+      <div class="mblock">
+        <div class="mblock-h">
+          <span class="mi" style="background:rgba(242,142,124,.2);color:var(--movement-ink)"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><use href="#i-walk"/></svg></span>
+          <h3>Walk</h3>
         </div>
-        <div class="f">
-          <label class="f-l" for="mv-dist">Distance</label>
-          <div class="f-w has-u"><input type="number" id="mv-dist" inputmode="decimal" step="0.1" min="0" max="100" placeholder="0.0"><span class="f-u">km</span></div>
+        <div class="f-2">
+          <div class="f">
+            <label class="f-l" for="mv-wdur">Duration</label>
+            <div class="f-w has-u"><input type="number" id="mv-wdur" inputmode="numeric" min="0" max="600" placeholder="0"><span class="f-u">min</span></div>
+          </div>
+          <div class="f">
+            <label class="f-l" for="mv-wdist">Distance</label>
+            <div class="f-w has-u"><input type="number" id="mv-wdist" inputmode="decimal" step="0.1" min="0" max="100" placeholder="0.0"><span class="f-u">km</span></div>
+          </div>
         </div>
       </div>
+
+      <div class="mblock">
+        <div class="mblock-h">
+          <span class="mi" style="background:rgba(74,140,240,.16);color:var(--training-ink)"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><use href="#i-run"/></svg></span>
+          <h3>Run</h3>
+        </div>
+        <div class="f-2">
+          <div class="f">
+            <label class="f-l" for="mv-rdur">Duration</label>
+            <div class="f-w has-u"><input type="number" id="mv-rdur" inputmode="numeric" min="0" max="600" placeholder="0"><span class="f-u">min</span></div>
+          </div>
+          <div class="f">
+            <label class="f-l" for="mv-rdist">Distance</label>
+            <div class="f-w has-u"><input type="number" id="mv-rdist" inputmode="decimal" step="0.1" min="0" max="100" placeholder="0.0"><span class="f-u">km</span></div>
+          </div>
+        </div>
+        <p class="f-h" id="mv-pace">&nbsp;</p>
+      </div>
+
       <div class="f">
         <label class="f-l" for="mv-steps">Step count</label>
         <div class="f-w has-u"><input type="number" id="mv-steps" inputmode="numeric" min="0" max="100000" placeholder="0"><span class="f-u">steps</span></div>
@@ -766,8 +836,57 @@ textarea{min-height:96px;resize:vertical;width:100%}
 <!-- ═══════════════════ CHECK-IN ═══════════════════ -->
 <section class="tab" id="tab-checkin" role="tabpanel" aria-labelledby="nav-checkin">
 <div class="tab-in">
-  <header class="ph"><h1 class="t-title">Check-in</h1><p class="ph-sub">Weekly review, and your coach's reply</p></header>
+  <header class="ph"><h1 class="t-title">Check-in</h1><p class="ph-sub" id="ci-sub">Today's intentions and reflection</p></header>
 
+  <div class="seg" style="margin-bottom:18px" role="group" aria-label="Check-in type">
+    <button type="button" id="ci-mode-daily"  aria-pressed="true"  onclick="setCheckinMode('daily')">Daily</button>
+    <button type="button" id="ci-mode-weekly" aria-pressed="false" onclick="setCheckinMode('weekly')">Weekly</button>
+  </div>
+
+  <!-- DAILY -->
+  <div id="ci-daily">
+    <div class="daynav">
+      <button class="daynav-b" id="cd-prev" onclick="navDay(-1)" aria-label="Previous day"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><use href="#i-left"/></svg></button>
+      <div><p class="daynav-l" id="cd-date"></p><p class="daynav-t" id="cd-rel"></p></div>
+      <button class="daynav-b" id="cd-next" onclick="navDay(1)" aria-label="Next day"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><use href="#i-right"/></svg></button>
+    </div>
+
+    <section class="sec">
+      <div class="sec-h"><h2 class="t-sec">Morning intention</h2></div>
+      <div class="card">
+        <div class="f">
+          <label class="f-l" for="cd-intention">What matters today?</label>
+          <textarea id="cd-intention" placeholder="One thing to get right — the session, the protein, getting to bed"></textarea>
+        </div>
+        <button class="btn btn-2" onclick="saveIntention()">Save intention</button>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><h2 class="t-sec">Daily checklist</h2><span class="t-meta" id="cd-chk-count"></span></div>
+      <div class="card" id="cd-checks"></div>
+      <p class="t-meta" style="margin-top:8px">Most of these tick themselves as you log in Train and Fuel.</p>
+    </section>
+
+    <section class="sec">
+      <div class="sec-h"><h2 class="t-sec">Evening reflection</h2></div>
+      <div class="card">
+        <div class="f">
+          <span class="f-l" id="l-dayr">How was the day?</span>
+          <div class="rate" role="group" aria-labelledby="l-dayr" id="rate-dayRating"></div>
+          <div class="rate-cap"><span class="t-meta">Rough</span><span class="t-meta">Great</span></div>
+        </div>
+        <div class="f">
+          <label class="f-l" for="cd-reflection">How did it actually go?</label>
+          <textarea id="cd-reflection" placeholder="What worked, what didn't, anything the coach should see"></textarea>
+        </div>
+        <button class="btn" onclick="saveReflection()">Save reflection</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- WEEKLY -->
+  <div id="ci-weekly" hidden>
   <div class="daynav">
     <button class="daynav-b" id="ci-prev" onclick="navWeek(-1)" aria-label="Previous week"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><use href="#i-left"/></svg></button>
     <div><p class="daynav-l" id="ci-week"></p><p class="daynav-t" id="ci-range"></p></div>
@@ -777,6 +896,12 @@ textarea{min-height:96px;resize:vertical;width:100%}
   <section class="sec">
     <div class="sec-h"><h2 class="t-sec">The week in numbers</h2></div>
     <div class="card-data" id="ci-numbers"></div>
+    <div id="ci-overview" style="margin-top:12px"></div>
+  </section>
+
+  <section class="sec" id="ci-days-sec" hidden>
+    <div class="sec-h"><h2 class="t-sec">Day by day</h2><span class="t-meta">Ben's daily detail</span></div>
+    <div id="ci-days"></div>
   </section>
 
   <section class="sec">
@@ -792,6 +917,7 @@ textarea{min-height:96px;resize:vertical;width:100%}
   <section class="sec" id="ci-summary-sec">
     <button class="btn btn-2" onclick="openSummary()">Copy a summary for your coach</button>
   </section>
+  </div>
 </div>
 </section>
 
@@ -866,15 +992,63 @@ const PHASES = [
   }
 ];
 
+// The BFT class timetable. Emoji are content here, not interface icons.
+const BFT_TYPES = [
+  { name: 'Strength',           emoji: '💪' },
+  { name: 'Pump',               emoji: '🏋️' },
+  { name: 'Hyper',              emoji: '🔥' },
+  { name: 'H.I.R.T',            emoji: '⚡' },
+  { name: 'Power',              emoji: '💥' },
+  { name: 'Cardio Summit',      emoji: '🏔️' },
+  { name: 'Cardio U',           emoji: '🎯' },
+  { name: 'Cardio HIIT',        emoji: '🚀' },
+  { name: 'CrewFit',            emoji: '🤝' },
+  { name: 'XTX',                emoji: '✖️' },
+  { name: 'Strength Endurance', emoji: '🔄' },
+  { name: 'Shred',              emoji: '🗡️' },
+  { name: 'Balanced',           emoji: '⚖️' }
+];
+
+// `derive` reads the tick straight from logged data, so ticking happens as a
+// side effect of using the app. Checks with derive:null stay manual, because
+// nothing in the app can know them.
 const DAILY_CHECKS = [
-  { id: 'bft',     label: 'BFT session done',       meta: '6am, six days a week' },
-  { id: 'walk',    label: 'Walk done',              meta: 'Any deliberate movement counts' },
-  { id: 'protein', label: 'Hit 160 g protein',      meta: 'The one macro that is non-negotiable' },
-  { id: 'logged',  label: 'Logged all food',        meta: 'MyFitnessPal, before bed' },
-  { id: 'water',   label: '2.5–3 L water',          meta: '' },
-  { id: 'nolate',  label: 'No unplanned eating after dinner', meta: '' }
+  { id: 'bft',     label: 'BFT session done',   meta: '6am, six days a week',
+    derive: d => !!(d.training && d.training.attended) },
+  { id: 'move',    label: 'Movement done',      meta: 'A walk or a run both count',
+    derive: d => movementTotals(d).any },
+  { id: 'protein', label: 'Hit 160 g protein',  meta: 'The one macro that is non-negotiable',
+    derive: d => !!(d.nutrition && d.nutrition.pro >= PROTEIN_TARGET) },
+  { id: 'logged',  label: 'Logged all food',    meta: 'MyFitnessPal, before bed',
+    derive: d => !!(d.nutrition && d.nutrition.cal) },
+  { id: 'water',   label: '2.5–3 L water', meta: 'Tap to tick', derive: null },
+  { id: 'nolate',  label: 'No unplanned eating after dinner', meta: 'Tap to tick', derive: null }
 ];
 const NUTRITION_CHECK_IDS = ['protein', 'logged', 'water', 'nolate'];
+
+// Movement can be a walk, a run, or both. Older entries stored a flat
+// {duration, distance} and are read as a walk.
+function movementTotals(day) {
+  const m = (day && day.movement) || {};
+  const walk = m.walk || ((m.duration || m.distance) ? { duration: m.duration, distance: m.distance } : {});
+  const run = m.run || {};
+  const duration = (walk.duration || 0) + (run.duration || 0);
+  const distance = +(((walk.distance || 0) + (run.distance || 0)).toFixed(1));
+  return {
+    walk, run, duration, distance,
+    steps: m.steps || null, feel: m.feel || 0,
+    hasWalk: !!(walk.duration || walk.distance),
+    hasRun: !!(run.duration || run.distance),
+    any: !!(duration || m.steps)
+  };
+}
+
+// A tick is derived where the app can know it, and stored where it cannot.
+function checkState(ds) {
+  const day = getDay(ds), stored = day.checks || {}, out = {};
+  DAILY_CHECKS.forEach(c => { out[c.id] = c.derive ? c.derive(day) : !!stored[c.id]; });
+  return out;
+}
 
 // ═══ DATE HELPERS ═════════════════════════════════════════════════════════
 function today() {
@@ -995,8 +1169,8 @@ function dayComponents(ds) {
   } else if (isRestDay(ds) && inProgram(ds) && Object.keys(day).length) {
     out.training = 100;   // a scheduled rest day, on a day that was logged
   }
-  const m = day.movement;
-  if (m && (m.duration || m.steps)) {
+  const m = movementTotals(day);
+  if (m.any) {
     const byMin = m.duration ? clamp(m.duration / 30 * 100, 0, 100) : 0;
     const bySteps = m.steps ? clamp(m.steps / 8000 * 100, 0, 100) : 0;
     out.movement = Math.round(Math.max(byMin, bySteps));
@@ -1092,26 +1266,48 @@ function paintRate(key) {
 
 // ═══ CHECKLIST ════════════════════════════════════════════════════════════
 function renderChecks(containerId, ids, countId) {
-  const day = getDay(_vd), checks = day.checks || {};
+  const state = checkState(_vd);
   const el = document.getElementById(containerId);
   if (!el) return;
   el.innerHTML = ids.map(id => {
     const c = DAILY_CHECKS.find(x => x.id === id);
-    const on = !!checks[id];
-    const meta = (id === 'bft' && isRestDay(_vd)) ? 'Rest day — no session scheduled' : c.meta;
-    return `<button class="chk" role="checkbox" aria-checked="${on}" onclick="toggleCheck('${id}')">
+    const on = state[id];
+    let meta = c.meta;
+    if (id === 'bft' && isRestDay(_vd)) meta = 'Rest day — no session scheduled';
+    else if (c.derive) meta = on ? metaWhenDone(id) : c.meta;
+    // Derived rows are status, not controls: they tick when the work is logged.
+    const tag = c.derive ? 'div' : 'button';
+    const attrs = c.derive
+      ? `role="img" aria-label="${esc(c.label)}: ${on ? 'done' : 'not done'}"`
+      : `role="checkbox" aria-checked="${on}" onclick="toggleCheck('${id}')"`;
+    return `<${tag} class="chk${c.derive ? ' chk-auto' : ''}" aria-checked="${on}" ${attrs}>
       <span class="chk-b"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#i-check"/></svg></span>
       <span><span class="chk-t">${esc(c.label)}</span>${meta ? `<span class="chk-m">${esc(meta)}</span>` : ''}</span>
-    </button>`;
+    </${tag}>`;
   }).join('');
   if (countId) {
-    const done = ids.filter(id => checks[id]).length;
-    document.getElementById(countId).textContent = `${done} of ${ids.length}`;
+    const n = ids.filter(id => state[id]).length;
+    document.getElementById(countId).textContent = `${n} of ${ids.length}`;
   }
+}
+// What a derived row says once it has ticked — the evidence behind the tick.
+function metaWhenDone(id) {
+  const day = getDay(_vd);
+  if (id === 'bft')   return 'Logged in Train' + (day.training && day.training.type ? ' · ' + day.training.type : '');
+  if (id === 'move')  { const m = movementTotals(day);
+    const bits = [];
+    if (m.hasWalk) bits.push('walk');
+    if (m.hasRun) bits.push('run');
+    return 'Logged in Train' + (bits.length ? ' · ' + bits.join(' + ') : '') + (m.duration ? ' · ' + m.duration + ' min' : ''); }
+  if (id === 'protein') return 'Logged in Fuel · ' + day.nutrition.pro + ' g';
+  if (id === 'logged')  return 'Logged in Fuel · ' + day.nutrition.cal + ' kcal';
+  return '';
 }
 function toggleCheck(id) {
   if (IS_COACH) return;
-  const day = getDay(_vd), checks = { ...(day.checks || {}) };
+  const c = DAILY_CHECKS.find(x => x.id === id);
+  if (!c || c.derive) return;               // derived rows are not tappable
+  const checks = { ...(getDay(_vd).checks || {}) };
   checks[id] = !checks[id];
   saveDay(_vd, { checks });
   renderTab(_tab);
@@ -1143,7 +1339,7 @@ function renderToday() {
   // 2 / Next action
   const phase = getPhase(today());
   document.getElementById('phase-pill').textContent = `Phase ${phase.id} · ${phase.name}`;
-  const day = getDay(today()), t = day.training || {}, m = day.movement || {};
+  const day = getDay(today()), t = day.training || {}, m = movementTotals(day);
   const rest = isRestDay(today());
   document.getElementById('today-plan').innerHTML = `
     <div style="display:flex;align-items:flex-start;gap:14px">
@@ -1158,12 +1354,12 @@ function renderToday() {
     <div class="divider"></div>
     <div style="display:flex;align-items:flex-start;gap:14px">
       <span style="width:40px;height:40px;flex:0 0 auto;border-radius:12px;background:rgba(242,142,124,.2);display:flex;align-items:center;justify-content:center;color:var(--movement-ink)">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><use href="#i-walk"/></svg></span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><use href="#i-${m.hasRun && !m.hasWalk ? 'run' : 'walk'}"/></svg></span>
       <div style="flex:1">
-        <p style="font-size:16px;font-weight:600">Daily walk</p>
-        <p class="t-meta">${m.duration ? m.duration + ' min' + (m.distance ? ' · ' + m.distance + ' km' : '') : 'Not logged yet'}</p>
+        <p style="font-size:16px;font-weight:600">Movement</p>
+        <p class="t-meta">${movementSummary(m) || 'Not logged yet'}</p>
       </div>
-      <span class="pill ${m.duration ? '' : 'pill-q'}">${m.duration ? 'Done' : 'To do'}</span>
+      <span class="pill ${m.any ? '' : 'pill-q'}">${m.any ? 'Done' : 'To do'}</span>
     </div>
     <div class="divider"></div>
     <div style="display:flex;align-items:flex-start;gap:14px">
@@ -1185,7 +1381,7 @@ function renderToday() {
   document.getElementById('s-streak').textContent = streak();
   const wk = weekDays(ws);
   document.getElementById('s-sessions').textContent = wk.filter(d => (getDay(d).training || {}).attended).length;
-  document.getElementById('s-walks').textContent = wk.filter(d => (getDay(d).movement || {}).duration).length;
+  document.getElementById('s-walks').textContent = wk.filter(d => movementTotals(getDay(d)).any).length;
 
   // Program card
   const dayN = clamp(daysBetween(PROGRAM_START, today()) + 1, 0, PROGRAM_WEEKS * 7);
@@ -1210,6 +1406,19 @@ function renderToday() {
   _vd = prev;
 }
 
+// One line describing a day's movement, whatever combination was logged.
+function movementSummary(m) {
+  const bits = [];
+  if (m.hasWalk) bits.push('Walk ' + [m.walk.duration ? m.walk.duration + ' min' : null,
+                                      m.walk.distance ? m.walk.distance + ' km' : null].filter(Boolean).join(' · '));
+  if (m.hasRun) bits.push('Run ' + [m.run.duration ? m.run.duration + ' min' : null,
+                                    m.run.distance ? m.run.distance + ' km' : null].filter(Boolean).join(' · '));
+  if (!bits.length && m.steps) return m.steps.toLocaleString('en-AU') + ' steps';
+  let out = bits.join('  +  ');
+  if (out && m.steps) out += '  ·  ' + m.steps.toLocaleString('en-AU') + ' steps';
+  return out;
+}
+
 function weekDays(ws) { return Array.from({ length: 7 }, (_, i) => addDays(ws, i)); }
 
 function renderWeekStrip(id, ws) {
@@ -1217,7 +1426,7 @@ function renderWeekStrip(id, ws) {
   el.innerHTML = weekDays(ws).map((ds, i) => {
     const d = getDay(ds);
     const trained = (d.training || {}).attended;
-    const walked = !!(d.movement || {}).duration;
+    const walked = movementTotals(d).any;
     const fuelled = !!(d.nutrition || {}).cal;
     const hits = [trained, walked, fuelled].filter(Boolean).length;
     const rest = isRestDay(ds);
@@ -1250,9 +1459,11 @@ function streak() {
 }
 
 // ═══ TRAIN ════════════════════════════════════════════════════════════════
+let _bftType = '';
+
 function renderTrain() {
   renderDayNav('tr');
-  const d = getDay(_vd), t = d.training || {}, m = d.movement || {};
+  const d = getDay(_vd), t = d.training || {}, m = movementTotals(d);
 
   _rate.trainFeel = t.feel || 0;
   _rate.moveFeel = m.feel || 0;
@@ -1261,16 +1472,42 @@ function renderTrain() {
   document.getElementById('att-yes').setAttribute('aria-pressed', String(t.logged === true && t.attended === true));
   document.getElementById('att-no').setAttribute('aria-pressed', String(t.logged === true && t.attended === false));
   document.getElementById('bft-detail').hidden = (t.logged === true && t.attended === false);
-  document.getElementById('tr-type').value = t.type || '';
+  _bftType = t.type || '';
+  renderBftTypes();
   document.getElementById('tr-notes').value = t.notes || '';
 
-  document.getElementById('mv-dur').value = m.duration || '';
-  document.getElementById('mv-dist').value = m.distance || '';
+  document.getElementById('mv-wdur').value = m.walk.duration || '';
+  document.getElementById('mv-wdist').value = m.walk.distance || '';
+  document.getElementById('mv-rdur').value = m.run.duration || '';
+  document.getElementById('mv-rdist').value = m.run.distance || '';
   document.getElementById('mv-steps').value = m.steps || '';
   document.getElementById('mv-err').hidden = true;
+  updatePace();
 
   drawTrainChart();
   drawStepsChart();
+}
+
+function renderBftTypes() {
+  const el = document.getElementById('bft-types');
+  if (!el) return;
+  el.innerHTML = BFT_TYPES.map(b =>
+    `<button type="button" aria-pressed="${_bftType === b.name}" ${IS_COACH ? 'disabled' : ''} onclick="setBftType('${esc(b.name)}')">
+       <span class="tem" aria-hidden="true">${b.emoji}</span>${esc(b.name)}</button>`).join('');
+}
+function setBftType(name) {
+  _bftType = (_bftType === name) ? '' : name;   // tap again to clear
+  renderBftTypes();
+}
+// Pace is derived, never entered.
+function updatePace() {
+  const el = document.getElementById('mv-pace');
+  if (!el) return;
+  const dur = num(document.getElementById('mv-rdur').value);
+  const dist = num(document.getElementById('mv-rdist').value);
+  if (!dur || !dist) { el.innerHTML = '&nbsp;'; return; }
+  const secs = Math.round(dur * 60 / dist);
+  el.textContent = `Pace ${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, '0')} per km`;
 }
 function setAttend(yes) {
   document.getElementById('att-yes').setAttribute('aria-pressed', String(yes));
@@ -1283,31 +1520,30 @@ function saveTraining() {
   if (!attended && !missed) { showToast('Choose trained or missed first'); return; }
   saveDay(_vd, { training: {
     logged: true, attended,
-    type: attended ? document.getElementById('tr-type').value : '',
+    type: attended ? _bftType : '',
     feel: attended ? (_rate.trainFeel || 0) : 0,
     notes: attended ? document.getElementById('tr-notes').value.trim() : ''
   }});
-  // Keep the daily checklist honest with what was just recorded.
-  const checks = { ...(getDay(_vd).checks || {}) };
-  checks.bft = attended;
-  saveDay(_vd, { checks });
   showToast(attended ? 'Session saved' : 'Marked as missed');
   renderTrain();
 }
 function saveMovement() {
-  const dur = num(document.getElementById('mv-dur').value);
-  const dist = num(document.getElementById('mv-dist').value);
+  const wd = num(document.getElementById('mv-wdur').value);
+  const wk = num(document.getElementById('mv-wdist').value);
+  const rd = num(document.getElementById('mv-rdur').value);
+  const rk = num(document.getElementById('mv-rdist').value);
   const steps = num(document.getElementById('mv-steps').value);
   const err = document.getElementById('mv-err');
-  if (dur == null && dist == null && steps == null) {
-    err.textContent = 'Add a duration, distance or step count before saving.';
+  if (wd == null && wk == null && rd == null && rk == null && steps == null) {
+    err.textContent = 'Add a walk, a run or a step count before saving.';
     err.hidden = false; return;
   }
   err.hidden = true;
-  saveDay(_vd, { movement: { duration: dur, distance: dist, steps: steps, feel: _rate.moveFeel || 0 } });
-  const checks = { ...(getDay(_vd).checks || {}) };
-  checks.walk = !!(dur || steps);
-  saveDay(_vd, { checks });
+  saveDay(_vd, { movement: {
+    walk: { duration: wd, distance: wk },
+    run:  { duration: rd, distance: rk },
+    steps, feel: _rate.moveFeel || 0
+  }});
   showToast('Movement saved');
   renderTrain();
 }
@@ -1552,7 +1788,7 @@ function drawTrainChart() {
   weeks.forEach(ws => {
     const days = weekDays(ws);
     const sessions = days.filter(d => (getDay(d).training || {}).attended).length;
-    const walks = days.filter(d => (getDay(d).movement || {}).duration).length;
+    const walks = days.filter(d => movementTotals(getDay(d)).any).length;
     const any = days.some(d => Object.keys(getDay(d)).length);
     const wn = programWeek(ws);
     data.push({ label: wn >= 1 ? 'W' + wn : fmtShort(ws), value: any ? sessions : null, colour: 'var(--training)', title: `${wn >= 1 ? 'Week ' + wn : 'Week of ' + fmtShort(ws)}: ${sessions} BFT sessions` });
@@ -1654,7 +1890,7 @@ function weekStats(ws) {
   return {
     phase, logged: days.length,
     sessions: days.filter(d => (getDay(d).training || {}).attended).length,
-    walks: days.filter(d => (getDay(d).movement || {}).duration).length,
+    walks: days.filter(d => movementTotals(getDay(d)).any).length,
     avgCal: avg(cals), calDays: cals.length,
     avgPro: avg(pros), proHit: pros.filter(p => p >= PROTEIN_TARGET).length,
     avgSleep: sleeps.length ? +(sleeps.reduce((a, b) => a + b, 0) / sleeps.length).toFixed(1) : null,
@@ -1663,7 +1899,53 @@ function weekStats(ws) {
   };
 }
 
+let _ciMode = 'daily';
+
+function setCheckinMode(mode) {
+  _ciMode = mode;
+  document.getElementById('ci-mode-daily').setAttribute('aria-pressed', String(mode === 'daily'));
+  document.getElementById('ci-mode-weekly').setAttribute('aria-pressed', String(mode === 'weekly'));
+  document.getElementById('ci-daily').hidden = mode !== 'daily';
+  document.getElementById('ci-weekly').hidden = mode !== 'weekly';
+  document.getElementById('ci-sub').textContent = mode === 'daily'
+    ? "Today's intentions and reflection"
+    : "Weekly review, and your coach's reply";
+  renderCheckin();
+}
+
+// ── Daily check-in: morning intention, checklist, evening reflection ──
+function renderDailyCheckin() {
+  renderDayNav('cd');
+  const d = getDay(_vd).day || {};
+  document.getElementById('cd-intention').value = d.intention || '';
+  document.getElementById('cd-reflection').value = d.reflection || '';
+  _rate.dayRating = d.rating || 0;
+  paintRate('dayRating');
+  renderChecks('cd-checks', DAILY_CHECKS.map(c => c.id), 'cd-chk-count');
+  if (IS_COACH) {
+    ['cd-intention', 'cd-reflection'].forEach(id => { document.getElementById(id).readOnly = true; });
+    document.querySelectorAll('#ci-daily .btn, #rate-dayRating button').forEach(b => { b.disabled = true; });
+  }
+}
+function saveIntention() {
+  const day = { ...(getDay(_vd).day || {}) };
+  day.intention = document.getElementById('cd-intention').value.trim();
+  saveDay(_vd, { day });
+  showToast('Intention saved');
+  renderDailyCheckin();
+}
+function saveReflection() {
+  const day = { ...(getDay(_vd).day || {}) };
+  day.reflection = document.getElementById('cd-reflection').value.trim();
+  day.rating = _rate.dayRating || 0;
+  day.savedAt = new Date().toISOString();
+  saveDay(_vd, { day });
+  showToast('Reflection saved');
+  renderDailyCheckin();
+}
+
 function renderCheckin() {
+  if (_ciMode === 'daily') { renderDailyCheckin(); return; }
   const wkNo = programWeek(_vw);
   document.getElementById('ci-week').textContent = `Week ${wkNo}`;
   document.getElementById('ci-range').textContent = `${fmtShort(_vw)} – ${fmtShort(addDays(_vw, 6))}`;
@@ -1679,7 +1961,7 @@ function renderCheckin() {
   document.getElementById('ci-numbers').innerHTML = `
     <div class="week" style="margin-bottom:16px">${weekDays(_vw).map((ds, i) => {
       const d = getDay(ds);
-      const hits = [(d.training || {}).attended, !!(d.movement || {}).duration, !!(d.nutrition || {}).cal].filter(Boolean).length;
+      const hits = [(d.training || {}).attended, movementTotals(d).any, !!(d.nutrition || {}).cal].filter(Boolean).length;
       const future = ds > today();
       let cls = 'wd-c' + (future ? (isRestDay(ds) ? ' rest' : '') : hits === 3 ? ' done' : hits ? ' part' : isRestDay(ds) ? ' rest' : '');
       if (ds === today()) cls += ' today';
@@ -1723,6 +2005,7 @@ function renderCheckin() {
       `<button type="button" aria-pressed="${_ciRatings[r.key] === n}" aria-label="${r.label}: ${n} out of 5" ${IS_COACH ? 'disabled' : ''} onclick="setCiRating('${r.key}',${n})" id="rate-ci-${r.key}-${n}">${n}</button>`).join('');
   });
 
+  renderCoachWeekly(_vw);
   renderCoachSection();
 }
 function setCiRating(key, n) {
@@ -1745,6 +2028,154 @@ function saveCheckin() {
   setCheckins(all);
   showToast('Check-in saved');
   renderCheckin();
+}
+
+// ═══ COACH: WEEKLY OVERVIEW + DAY BY DAY ══════════════════════════════════
+// The coach checks in at the end of a week, so they get the week's targets
+// against actuals first, then every day underneath it.
+
+function coachRow(label, target, actual, ok) {
+  const colour = ok === null ? 'var(--t3)' : ok ? 'var(--action)' : 'var(--movement-ink)';
+  const word   = ok === null ? 'no data'   : ok ? 'on target' : 'off target';
+  return `<div class="crow">
+    <span class="cl">${esc(label)}</span>
+    <span class="cv" style="color:${colour}">${esc(actual)}</span>
+    <span class="ct">target ${esc(target)}</span>
+    <span class="cw" style="color:${colour}">${word}</span>
+  </div>`;
+}
+
+function avgOf(ws, pick) {
+  const v = weekDays(ws).map(d => pick(getDay(d))).filter(Boolean);
+  return v.length ? (v.reduce((a, b) => a + b, 0) / v.length) : null;
+}
+
+function renderCoachWeekly(ws) {
+  const sec = document.getElementById('ci-days-sec');
+  const wrap = document.getElementById('ci-overview');
+  if (!IS_COACH) { sec.hidden = true; wrap.innerHTML = ''; return; }
+  sec.hidden = false;
+
+  const st = weekStats(ws), ph = st.phase;
+  const avgFeel = avgOf(ws, d => (d.training || {}).feel);
+  const avgEnergy = avgOf(ws, d => (d.recovery || {}).energy);
+  const one = v => v === null ? null : +v.toFixed(1);
+
+  const rows = [
+    coachRow('Calories', ph.cal[0] + '–' + ph.cal[1] + ' kcal',
+      st.avgCal ? st.avgCal + ' kcal' : '—',
+      st.avgCal === null ? null : (st.avgCal >= ph.cal[0] && st.avgCal <= ph.cal[1])),
+    coachRow('Protein', PROTEIN_TARGET + ' g min',
+      st.avgPro ? st.avgPro + ' g' : '—',
+      st.avgPro === null ? null : st.avgPro >= PROTEIN_TARGET),
+    coachRow('BFT sessions', '6 per week', st.sessions + ' of 6', st.sessions >= 6),
+    coachRow('Movement days', '7 per week', st.walks + ' of 7', st.walks >= 7),
+    coachRow('Sleep', SLEEP_TARGET + ' h',
+      st.avgSleep ? st.avgSleep + ' h' : '—',
+      st.avgSleep === null ? null : st.avgSleep >= SLEEP_TARGET),
+    coachRow('Steps', '8,000 per day',
+      st.avgSteps ? st.avgSteps.toLocaleString('en-AU') : '—',
+      st.avgSteps === null ? null : st.avgSteps >= 8000),
+    coachRow('Session quality', '3.5 of 5', avgFeel ? one(avgFeel) + ' / 5' : '—',
+      avgFeel === null ? null : avgFeel >= 3.5),
+    coachRow('Energy', '3.5 of 5', avgEnergy ? one(avgEnergy) + ' / 5' : '—',
+      avgEnergy === null ? null : avgEnergy >= 3.5)
+  ].join('');
+
+  const wt = weekDays(ws).map(d => (getDay(d).body || {}).weight).filter(Boolean);
+  const delta = wt.length >= 2 ? (wt[wt.length - 1] - wt[0]) : null;
+
+  wrap.innerHTML = `
+    <div class="card-data" style="margin-bottom:12px">
+      <p class="lbl" style="margin-bottom:4px">Targets against actuals</p>
+      ${rows}
+    </div>
+    <div class="card-data">
+      <p class="lbl" style="margin-bottom:10px">Weight</p>
+      <div class="stats">
+        <div class="stat"><p class="stat-v num">${wt.length ? wt[wt.length - 1].toFixed(1) : '—'}</p><p class="stat-l">Latest</p><p class="stat-d" style="color:var(--t3)">kg</p></div>
+        <div class="stat"><p class="stat-v num">${delta === null ? '—' : (delta > 0 ? '+' : '') + delta.toFixed(1)}</p><p class="stat-l">This week</p><p class="stat-d" style="color:var(--t3)">kg</p></div>
+        <div class="stat"><p class="stat-v num">${ph.loss}</p><p class="stat-l">Target loss</p><p class="stat-d" style="color:var(--t3)">kg / week</p></div>
+      </div>
+      ${wt.length < 2 ? '<p class="t-meta" style="margin-top:10px">Fewer than two weigh-ins this week, so there is no trend to read.</p>' : ''}
+    </div>`;
+
+  document.getElementById('ci-days').innerHTML = weekDays(ws).map(renderCoachDay).join('');
+}
+
+function renderCoachDay(ds) {
+  const day = getDay(ds), future = ds > today();
+  const b = day.body || {}, r = day.recovery || {}, t = day.training || {}, n = day.nutrition || {};
+  const m = movementTotals(day), dd = day.day || {}, ph = getPhase(ds);
+  const prev = getDay(addDays(ds, -1)).body || {};
+
+  const trend = (cur, was, lowerBetter) => {
+    if (!cur || !was) return '<span class="ctrend" style="color:var(--t3)">–</span>';
+    if (Math.abs(cur - was) < 0.05) return '<span class="ctrend" style="color:var(--t3)">→</span>';
+    const up = cur > was, good = lowerBetter ? !up : up;
+    return `<span class="ctrend" style="color:${good ? 'var(--action)' : 'var(--movement-ink)'}">${up ? '↑' : '↓'}</span>`;
+  };
+  const macro = (v, lo, hi, isMin) => {
+    if (!v) return 'var(--t3)';
+    return (isMin ? v >= lo : (v >= lo && v <= hi)) ? 'var(--action)' : 'var(--movement-ink)';
+  };
+  const has = b.weight || r.sleepHours || t.logged || m.any || n.cal || dd.reflection;
+
+  const bftEmoji = (BFT_TYPES.find(x => x.name === t.type) || {}).emoji || '';
+  let bft = 'Not logged';
+  if (t.logged) {
+    bft = t.attended
+      ? (bftEmoji ? bftEmoji + ' ' : '') + (t.type || 'Session') + (t.feel ? ' · felt ' + t.feel + '/5' : '')
+      : (isRestDay(ds) ? 'Rest day' : 'Missed');
+  } else if (isRestDay(ds)) bft = 'Rest day';
+
+  let note = '';
+  if (future) note = 'upcoming';
+  else if (!has) note = 'nothing logged';
+  else if (dd.rating) note = 'day ' + dd.rating + '/5';
+
+  return `<div class="cday${future ? ' future' : ''}">
+    <div class="cday-h">
+      <span>${fmtDate(ds, { weekday: 'long', day: 'numeric', month: 'short' })}</span>
+      <span class="cday-n">${note}</span>
+    </div>
+    ${dd.intention ? `<p class="t-meta">Intention: ${esc(dd.intention)}</p>` : ''}
+
+    <p class="cday-s">Body</p>
+    <div class="cday-grid cday-g3">
+      <div class="cday-c"><div class="v">${b.weight ? b.weight.toFixed(1) : '—'} ${trend(b.weight, prev.weight, true)}</div><div class="l">Weight kg</div></div>
+      <div class="cday-c"><div class="v">${b.fatPct ? b.fatPct + '%' : '—'} ${trend(b.fatPct, prev.fatPct, true)}</div><div class="l">Body fat</div></div>
+      <div class="cday-c"><div class="v">${b.muscleMass ? b.muscleMass.toFixed(1) : '—'} ${trend(b.muscleMass, prev.muscleMass, false)}</div><div class="l">Muscle kg</div></div>
+    </div>
+
+    <p class="cday-s">Recovery</p>
+    <div class="cday-row">
+      <span><b>${r.sleepHours ? r.sleepHours + ' h' : '—'}</b> sleep</span>
+      ${r.bedtime ? `<span style="color:var(--t3)">bed ${esc(r.bedtime)}</span>` : ''}
+      ${r.sleepQuality ? `<span style="color:var(--t3)">quality ${r.sleepQuality}/5</span>` : ''}
+      <span style="margin-left:auto"></span>
+      <span>energy <b>${r.energy ? r.energy + '/5' : '—'}</b></span>
+      <span>mood <b>${r.mood ? r.mood + '/5' : '—'}</b></span>
+    </div>
+
+    <p class="cday-s">Training and movement</p>
+    <div class="cday-row"><span><b>${esc(bft)}</b></span></div>
+    <div class="cday-row" style="margin-top:6px">
+      <span>${esc(movementSummary(m) || 'No movement logged')}</span>
+      ${m.feel ? `<span style="margin-left:auto;color:var(--t3)">felt ${m.feel}/5</span>` : ''}
+    </div>
+
+    <p class="cday-s">Macros</p>
+    <div class="cday-grid cday-g4">
+      <div class="cday-c"><div class="v" style="color:${macro(n.cal, ph.cal[0], ph.cal[1], false)}">${n.cal || '—'}</div><div class="l">kcal</div></div>
+      <div class="cday-c"><div class="v" style="color:${macro(n.pro, PROTEIN_TARGET, null, true)}">${n.pro ? n.pro + 'g' : '—'}</div><div class="l">Protein</div></div>
+      <div class="cday-c"><div class="v" style="color:${macro(n.carb, ph.carb[0], ph.carb[1], false)}">${n.carb ? n.carb + 'g' : '—'}</div><div class="l">Carbs</div></div>
+      <div class="cday-c"><div class="v" style="color:${macro(n.fat, ph.fat[0], ph.fat[1], false)}">${n.fat ? n.fat + 'g' : '—'}</div><div class="l">Fat</div></div>
+    </div>
+
+    ${t.notes ? `<p class="cday-s">Session notes</p><div class="cday-note">${esc(t.notes)}</div>` : ''}
+    ${dd.reflection ? `<p class="cday-s">Reflection</p><div class="cday-note">${esc(dd.reflection)}</div>` : ''}
+  </div>`;
 }
 
 // ═══ COACH ════════════════════════════════════════════════════════════════
@@ -1871,11 +2302,13 @@ function applyCoachMode() {
 }
 
 async function init() {
-  ['trainFeel', 'moveFeel', 'sleepQ', 'energy', 'mood'].forEach(buildRate);
+  ['trainFeel', 'moveFeel', 'sleepQ', 'energy', 'mood', 'dayRating'].forEach(buildRate);
   ['b-wt', 'b-fat', 'b-musc'].forEach(id => document.getElementById(id).addEventListener('input', updateDerived));
+  ['mv-rdur', 'mv-rdist'].forEach(id => document.getElementById(id).addEventListener('input', updatePace));
 
   // Paint immediately from localStorage — the data is already here.
   applyCoachMode();
+  if (IS_COACH) setCheckinMode('weekly');
   switchTab(IS_COACH ? 'checkin' : 'today');
   _syncState = 'syncing';
   renderSyncStamp();
