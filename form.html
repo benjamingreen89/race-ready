@@ -56,19 +56,31 @@ Storage.prototype.removeItem = function(k) {
   if (this === localStorage && _fmKeys.includes(k)) _removeFromFirestore(k);
 };
 
+let _syncState = 'idle';   // idle | syncing | ok | failed
+
 async function _loadFromFirestore() {
+  let changed = false;
   try {
     const snap = await _doc.get();
     if (snap.exists) {
       const d = snap.data();
       _fmKeys.forEach(k => {
         if (d[k] !== undefined && d[k] !== null) {
-          _origSet.call(localStorage, k, JSON.stringify(d[k]));
+          const next = JSON.stringify(d[k]);
+          if (localStorage.getItem(k) !== next) {
+            _origSet.call(localStorage, k, next);
+            changed = true;
+          }
         }
       });
-      _lastSync = new Date();
     }
-  } catch(e) { console.warn('Firestore load failed, using local data', e); }
+    _lastSync = new Date();
+    _syncState = 'ok';
+  } catch(e) {
+    _syncState = 'failed';
+    console.warn('Firestore load failed, using local data', e);
+  }
+  return changed;
 }
 </script>
 <style>
@@ -944,9 +956,14 @@ function closeModal(id, e) { if (e.target.id === id) document.getElementById(id)
 function renderSyncStamp() {
   const el = document.getElementById('sync-stamp');
   if (!el) return;
-  el.textContent = _lastSync
-    ? 'Synced ' + _lastSync.toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit' })
-    : 'Saved on this device — not synced yet';
+  if (_syncState === 'syncing' && !_lastSync) { el.textContent = 'Checking for updates…'; return; }
+  if (_lastSync) {
+    el.textContent = 'Synced ' + _lastSync.toLocaleTimeString('en-AU', { hour: 'numeric', minute: '2-digit' });
+  } else if (_syncState === 'failed') {
+    el.textContent = 'Offline — saved on this device, will sync later';
+  } else {
+    el.textContent = 'Saved on this device';
+  }
 }
 
 // ═══ FORM SCORE ═══════════════════════════════════════════════════════════
@@ -1857,11 +1874,21 @@ async function init() {
   ['trainFeel', 'moveFeel', 'sleepQ', 'energy', 'mood'].forEach(buildRate);
   ['b-wt', 'b-fat', 'b-musc'].forEach(id => document.getElementById(id).addEventListener('input', updateDerived));
 
-  await _loadFromFirestore();
-
+  // Paint immediately from localStorage — the data is already here.
   applyCoachMode();
   switchTab(IS_COACH ? 'checkin' : 'today');
+  _syncState = 'syncing';
   renderSyncStamp();
+
+  // Reconcile with Firestore in the background, then re-render only if the
+  // remote actually differed and the user is not mid-entry.
+  _loadFromFirestore().then(changed => {
+    renderSyncStamp();
+    if (!changed) return;
+    const el = document.activeElement;
+    const typing = el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName);
+    if (!typing) renderTab(_tab);
+  });
 
   if ('serviceWorker' in navigator) {
     try {
