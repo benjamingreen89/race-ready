@@ -991,7 +991,7 @@ function dayComponents(ds) {
   }
   const t = day.training;
   if (t && t.logged) {
-    out.training = t.attended ? (t.feel ? 60 + t.feel * 8 : 92) : (isRestDay(ds) ? 100 : 30);
+    out.training = t.attended ? (t.feel ? 60 + t.feel * 8 : 92) : (isRestDay(ds) ? 100 : 0);
   } else if (isRestDay(ds) && inProgram(ds) && Object.keys(day).length) {
     out.training = 100;   // a scheduled rest day, on a day that was logged
   }
