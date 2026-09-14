@@ -436,19 +436,21 @@ textarea{min-height:96px;resize:vertical;width:100%}
 .brand-w{font-size:23px;font-weight:700;letter-spacing:-.5px}
 
 /* ── Coach: per-day detail ── */
-.cday{background:#fff;border:1px solid var(--mist);border-radius:var(--r-card);padding:16px 18px;margin-bottom:10px}
+.cday{background:#fff;border:1px solid var(--mist);border-radius:var(--r-card);padding:14px 16px;margin-bottom:10px}
+.cday-slim{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:15px;font-weight:700;padding:13px 16px}
+.cday-since{font-size:12px;line-height:17px;color:var(--t3);margin-top:7px;font-variant-numeric:tabular-nums}
 .cday.future{opacity:.45}
 .cday-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;font-size:15px;font-weight:700;margin-bottom:2px}
 .cday-h .cday-n{font-size:12px;font-weight:600;color:var(--t3);white-space:nowrap}
-.cday-s{font-size:12px;line-height:16px;font-weight:700;color:var(--t3);letter-spacing:.3px;text-transform:uppercase;margin:14px 0 7px}
-.cday-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;line-height:19px;background:var(--cloud);border-radius:10px;padding:9px 12px}
+.cday-s{font-size:11px;line-height:15px;font-weight:700;color:var(--t3);letter-spacing:.4px;text-transform:uppercase;margin:12px 0 6px}
+.cday-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;line-height:19px;background:var(--cloud);border-radius:9px;padding:8px 11px}
 .cday-grid{display:grid;gap:6px}
 .cday-g3{grid-template-columns:repeat(3,1fr)}
 .cday-g4{grid-template-columns:repeat(4,1fr)}
-.cday-c{background:var(--cloud);border-radius:10px;padding:9px 6px;text-align:center}
+.cday-c{background:var(--cloud);border-radius:9px;padding:8px 6px;text-align:center}
 .cday-c .v{font-size:15px;font-weight:700;font-variant-numeric:tabular-nums}
 .cday-c .l{font-size:11px;line-height:15px;color:var(--t3);margin-top:2px}
-.cday-note{font-size:13px;line-height:20px;color:var(--t2);background:var(--cloud);border-radius:10px;padding:10px 12px;white-space:pre-wrap}
+.cday-note{font-size:13px;line-height:19px;color:var(--t2);background:var(--cloud);border-radius:9px;padding:9px 11px;white-space:pre-wrap}
 .ctrend{font-size:12px;font-weight:700}
 /* Two lines: name + actual above, target + verdict below. Four columns on
    one line overflowed at 375px once a label wrapped. */
@@ -460,7 +462,6 @@ textarea{min-height:96px;resize:vertical;width:100%}
 .crow .cw{font-size:12px;font-weight:700;text-align:right;white-space:nowrap}
 
 /* ── Coach ── */
-.coach-bar{display:flex;align-items:center;gap:10px;margin:12px var(--inset) 0;padding:10px 16px;background:rgba(74,140,240,.14);border:1px solid rgba(74,140,240,.4);border-radius:var(--r-ctrl);font-size:14px;font-weight:600;color:var(--training-ink)}
 
 /* ── Tablet ── */
 @media(min-width:768px){
@@ -535,10 +536,6 @@ textarea{min-height:96px;resize:vertical;width:100%}
 </defs>
 </svg>
 
-<div class="coach-bar" id="coach-bar" hidden>
-  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><use href="#i-info"/></svg>
-  <span id="coach-bar-text">Coach view — Ben's data is read-only here</span>
-</div>
 
 <!-- ═══════════════════ TODAY ═══════════════════ -->
 <section class="tab active" id="tab-today" role="tabpanel" aria-labelledby="nav-today">
@@ -951,8 +948,8 @@ textarea{min-height:96px;resize:vertical;width:100%}
     <div class="card" id="ci-status"></div>
   </section>
 
-  <section class="sec" id="ci-days-sec" hidden>
-    <div class="sec-h"><h2 class="t-sec">Day by day</h2><span class="t-meta">Ben's daily detail</span></div>
+  <section class="sec" id="ci-days-sec">
+    <div class="sec-h"><h2 class="t-sec">Day by day</h2><span class="t-meta">every day this week</span></div>
     <div id="ci-days"></div>
   </section>
 
@@ -963,35 +960,23 @@ textarea{min-height:96px;resize:vertical;width:100%}
 
   <section class="sec">
     <div class="sec-h"><h2 class="t-sec">Coach</h2></div>
-    <div class="card" id="ci-coach"></div>
+    <div class="card">
+      <div class="f">
+        <label class="f-l" for="set-coach">Coach's name</label>
+        <div class="f-w"><input type="text" id="set-coach" maxlength="40" placeholder="Their name" onchange="saveCoachName()"></div>
+        <p class="f-h">Used wherever the app refers to your coach. Leave blank for just "Coach".</p>
+      </div>
+      <div class="divider"></div>
+      <div id="ci-coach"></div>
+      <div class="divider"></div>
+      <button class="btn btn-2" onclick="copyCoachLink()">Copy the link to share</button>
+    </div>
   </section>
 
   <section class="sec" id="ci-summary-sec">
     <button class="btn btn-2" onclick="openSummary()">Copy a summary for your coach</button>
   </section>
 
-  <section class="sec" id="ci-settings-sec">
-    <div class="sec-h"><h2 class="t-sec">Coach settings</h2></div>
-    <div class="card">
-      <div class="f">
-        <label class="f-l" for="set-coach">Coach's name</label>
-        <div class="f-w"><input type="text" id="set-coach" maxlength="40" placeholder="e.g. Mackie" onchange="saveCoachName()"></div>
-        <p class="f-h">Used wherever the app refers to your coach.</p>
-      </div>
-      <div class="divider"></div>
-      <div style="display:flex;align-items:center;gap:14px">
-        <div style="flex:1;min-width:0">
-          <p style="font-size:16px;font-weight:600">View as coach</p>
-          <p class="t-meta">See exactly what your coach sees. Your logs stay read-only while it is on.</p>
-        </div>
-        <button class="switch" id="coach-switch" role="switch" aria-checked="false" onclick="toggleCoachView()" aria-label="View as coach">
-          <span class="switch-k"></span>
-        </button>
-      </div>
-      <div class="divider"></div>
-      <button class="btn btn-2" onclick="copyCoachLink()">Copy the coach link</button>
-    </div>
-  </section>
   </div>
 </div>
 </section>
@@ -1213,10 +1198,6 @@ function coachLabel() { return coachName() || 'Coach'; }
 let _vd = today();                 // the day being viewed / edited
 let _vw = weekStart(today());      // the week being reviewed
 let _rate = {};                    // trainFeel, moveFeel, sleepQ, energy, mood
-// Coach view is reachable by ?coach for a shared link, or by the in-app
-// toggle, which is remembered on this device only.
-let IS_COACH = new URLSearchParams(location.search).has('coach')
-  || sessionStorage.getItem('fm_view_as_coach') === '1';
 
 // ═══ SMALL UTILITIES ══════════════════════════════════════════════════════
 function esc(s) {
@@ -1471,7 +1452,6 @@ function metaWhenDone(id) {
   return '';
 }
 function toggleCheck(id) {
-  if (IS_COACH) return;
   const c = DAILY_CHECKS.find(x => x.id === id);
   if (!c || c.derive) return;               // derived rows are not tappable
   const checks = { ...(getDay(_vd).checks || {}) };
@@ -1753,7 +1733,7 @@ function renderBftTypes() {
   const el = document.getElementById('bft-types');
   if (!el) return;
   el.innerHTML = BFT_TYPES.map(b =>
-    `<button type="button" aria-pressed="${_bftType === b.name}" ${IS_COACH ? 'disabled' : ''} onclick="setBftType('${esc(b.name)}')">
+    `<button type="button" aria-pressed="${_bftType === b.name}" onclick="setBftType('${esc(b.name)}')">
        <span class="tem" aria-hidden="true">${b.emoji}</span>${esc(b.name)}</button>`).join('');
 }
 function setBftType(name) {
@@ -1775,10 +1755,10 @@ function renderActivities() {
     return `<div class="act">
       <div class="act-h">
         <div class="seg" role="group" aria-label="Activity ${i + 1} type">
-          ${ACTIVITY_TYPES.map(t => `<button type="button" aria-pressed="${a.type === t.id}" ${IS_COACH ? 'disabled' : ''}
+          ${ACTIVITY_TYPES.map(t => `<button type="button" aria-pressed="${a.type === t.id}"
              onclick="setActType(${i},'${t.id}')"><span aria-hidden="true">${t.emoji}</span> ${t.label}</button>`).join('')}
         </div>
-        <button class="act-x" ${IS_COACH ? 'disabled' : ''} onclick="removeActivity(${i})" aria-label="Remove activity ${i + 1}">
+        <button class="act-x" onclick="removeActivity(${i})" aria-label="Remove activity ${i + 1}">
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><use href="#i-x"/></svg></button>
       </div>
       <div class="f-2">
@@ -1798,7 +1778,6 @@ function renderActivities() {
   }).join('');
 }
 function addActivity() {
-  if (IS_COACH) return;
   _acts.push({ type: 'walk', duration: null, distance: null });
   renderActivities();
   const el = document.getElementById('act-dur-' + (_acts.length - 1));
@@ -2247,10 +2226,6 @@ function renderDailyCheckin() {
   _rate.dayRating = d.rating || 0;
   paintRate('dayRating');
   renderChecks('cd-checks', DAILY_CHECKS.map(c => c.id), 'cd-chk-count');
-  if (IS_COACH) {
-    ['cd-intention', 'cd-reflection'].forEach(id => { document.getElementById(id).readOnly = true; });
-    document.querySelectorAll('#ci-daily .btn, #rate-dayRating button').forEach(b => { b.disabled = true; });
-  }
 }
 function saveIntention() {
   const day = { ...(getDay(_vd).day || {}) };
@@ -2315,19 +2290,19 @@ function renderCheckin() {
       <div class="rate" role="group" aria-labelledby="cil-${r.key}" id="rate-ci-${r.key}"></div>
     </div>`).join('')}
     <div class="f"><label class="f-l" for="ci-well">What went well?</label>
-      <textarea id="ci-well" ${IS_COACH ? 'readonly' : ''} placeholder="The wins, however small">${esc(ci.well)}</textarea></div>
+      <textarea id="ci-well" placeholder="The wins, however small">${esc(ci.well)}</textarea></div>
     <div class="f"><label class="f-l" for="ci-hard">What was hard?</label>
-      <textarea id="ci-hard" ${IS_COACH ? 'readonly' : ''} placeholder="Where it fell apart, and why">${esc(ci.hard)}</textarea></div>
+      <textarea id="ci-hard" placeholder="Where it fell apart, and why">${esc(ci.hard)}</textarea></div>
     <div class="f"><label class="f-l" for="ci-adjust">What are you adjusting?</label>
-      <textarea id="ci-adjust" ${IS_COACH ? 'readonly' : ''} placeholder="One or two concrete changes">${esc(ci.adjust)}</textarea></div>
+      <textarea id="ci-adjust" placeholder="One or two concrete changes">${esc(ci.adjust)}</textarea></div>
     <div class="f"><label class="f-l" for="ci-next">The plan for next week</label>
-      <textarea id="ci-next" ${IS_COACH ? 'readonly' : ''} placeholder="What does a good week look like?">${esc(ci.next)}</textarea></div>
-    ${IS_COACH ? '' : '<button class="btn" onclick="saveCheckin()">Save check-in</button>'}`;
+      <textarea id="ci-next" placeholder="What does a good week look like?">${esc(ci.next)}</textarea></div>
+    <button class="btn" onclick="saveCheckin()">Save check-in</button>`;
 
   CI_RATINGS.forEach(r => {
     const el = document.getElementById('rate-ci-' + r.key);
     el.innerHTML = [1, 2, 3, 4, 5].map(n =>
-      `<button type="button" aria-pressed="${_ciRatings[r.key] === n}" aria-label="${r.label}: ${n} out of 5" ${IS_COACH ? 'disabled' : ''} onclick="setCiRating('${r.key}',${n})" id="rate-ci-${r.key}-${n}">${n}</button>`).join('');
+      `<button type="button" aria-pressed="${_ciRatings[r.key] === n}" aria-label="${r.label}: ${n} out of 5" onclick="setCiRating('${r.key}',${n})" id="rate-ci-${r.key}-${n}">${n}</button>`).join('');
   });
 
   renderCheckinStatus(_vw);
@@ -2335,10 +2310,6 @@ function renderCheckin() {
   renderCoachSection();
   const cn = document.getElementById('set-coach');
   if (cn) cn.value = coachName();
-  const sw = document.getElementById('coach-switch');
-  if (sw) sw.setAttribute('aria-checked', String(IS_COACH));
-  const ss = document.getElementById('ci-settings-sec');
-  if (ss) ss.hidden = IS_COACH;
 }
 function setCiRating(key, n) {
   _ciRatings[key] = _ciRatings[key] === n ? 0 : n;
@@ -2383,10 +2354,8 @@ function avgOf(ws, pick) {
 }
 
 function renderCoachWeekly(ws) {
-  const sec = document.getElementById('ci-days-sec');
   const wrap = document.getElementById('ci-overview');
-  if (!IS_COACH) { sec.hidden = true; wrap.innerHTML = ''; return; }
-  sec.hidden = false;
+  document.getElementById('ci-days-sec').hidden = false;
 
   const st = weekStats(ws), ph = st.phase;
   const avgFeel = avgOf(ws, d => (d.training || {}).feel);
@@ -2435,6 +2404,25 @@ function renderCoachWeekly(ws) {
   document.getElementById('ci-days').innerHTML = weekDays(ws).map(renderCoachDay).join('');
 }
 
+// Three headline numbers with their day-on-day move, and one line for the
+// whole-program change. The full six-metric table lives in the Body tab.
+function bodyStrip(bt) {
+  const pick = k => bt.find(t => t.key === k) || {};
+  const head = ['weight', 'fatPct', 'muscleMass'].map(pick);
+  if (!head.some(t => t.value != null)) {
+    return '<div class="cday-row"><span style="color:var(--t3)">No measurements</span></div>';
+  }
+  const tiles = head.map(t => `<div class="cday-c">
+      <div class="v">${t.value == null ? '—' : t.value.toFixed(t.dp)}</div>
+      <div class="l">${esc(t.label)}${t.unit === '%' ? ' %' : ' kg'}</div>
+      <div style="margin-top:3px">${t.value == null ? '' : deltaChip(t, 'vsPrev')}</div>
+    </div>`).join('');
+  const since = bt.filter(t => t.vsStart).map(t =>
+    `${esc(t.label)} ${t.vsStart.delta > 0 ? '+' : ''}${t.vsStart.text}${t.unit === '%' ? '%' : ''}`);
+  return `<div class="cday-grid cday-g3">${tiles}</div>
+    ${since.length ? `<p class="cday-since">Since day 1 · ${since.join(' · ')}</p>` : ''}`;
+}
+
 function renderCoachDay(ds) {
   const day = getDay(ds), future = ds > today();
   const b = day.body || {}, r = day.recovery || {}, t = day.training || {}, n = day.nutrition || {};
@@ -2467,22 +2455,22 @@ function renderCoachDay(ds) {
   else if (!has) note = 'nothing logged';
   else if (dd.rating) note = 'day ' + dd.rating + '/5';
 
+  // Nothing logged yet: one slim line instead of a skeleton of empty sections.
+  if (!has) {
+    return `<div class="cday cday-slim${future ? ' future' : ''}">
+      <span>${fmtDate(ds, { weekday: 'long', day: 'numeric', month: 'short' })}</span>
+      <span class="cday-n">${future ? 'upcoming' : 'nothing logged'}</span>
+    </div>`;
+  }
+
   return `<div class="cday${future ? ' future' : ''}">
     <div class="cday-h">
       <span>${fmtDate(ds, { weekday: 'long', day: 'numeric', month: 'short' })}</span>
       <span class="cday-n">${note}</span>
     </div>
-    ${dd.intention ? `<p class="t-meta">Intention: ${esc(dd.intention)}</p>` : ''}
 
     <p class="cday-s">Body</p>
-    ${bt.some(t => t.value != null) ? `
-    <div class="bt-head"><span></span><span>Now</span><span>vs prev</span><span>vs day 1</span></div>
-    ${bt.filter(t => t.value != null).map(t => `<div class="bt-row">
-      <span class="bt-l">${esc(t.label)}</span>
-      <span class="bt-v">${t.value.toFixed(t.dp)}<span class="bt-u">${esc(t.unit)}</span></span>
-      <span>${deltaChip(t, 'vsPrev')}</span>
-      <span>${deltaChip(t, 'vsStart')}</span>
-    </div>`).join('')}` : '<div class="cday-row"><span style="color:var(--t3)">No measurements</span></div>'}
+    ${bodyStrip(bt)}
 
     <p class="cday-s">Recovery</p>
     <div class="cday-row">
@@ -2511,7 +2499,11 @@ function renderCoachDay(ds) {
     </div>
 
     ${t.notes ? `<p class="cday-s">Session notes</p><div class="cday-note">${esc(t.notes)}</div>` : ''}
-    ${dd.reflection ? `<p class="cday-s">Reflection</p><div class="cday-note">${esc(dd.reflection)}</div>` : ''}
+    ${(dd.intention || dd.reflection || !future) ? `
+      <p class="cday-s">Reflection${dd.rating ? ` · ${dd.rating}/5` : ''}</p>
+      ${dd.intention ? `<div class="cday-note" style="margin-bottom:6px"><b style="color:var(--t3)">Intention:</b> ${esc(dd.intention)}</div>` : ''}
+      ${dd.reflection ? `<div class="cday-note">${esc(dd.reflection)}</div>` : ''}
+      ${!dd.intention && !dd.reflection ? '<div class="cday-row"><span style="color:var(--t3)">Nothing written for this day</span></div>' : ''}` : ''}
   </div>`;
 }
 
@@ -2520,44 +2512,23 @@ function renderCoachDay(ds) {
 // whoever is coaching this block.
 function renderCoachSection() {
   const c = getCoach()[_vw] || {};
-  const el = document.getElementById('ci-coach');
   _coachRating = c.rating || 0;
-  if (IS_COACH) {
-    el.innerHTML = `
-      <div class="f">
-        <span class="f-l" id="cr-l">Your rating of Ben's week</span>
-        <div class="rate" role="group" aria-labelledby="cr-l" id="rate-coach"></div>
-      </div>
-      <div class="f"><label class="f-l" for="co-comment">Comments</label>
-        <textarea id="co-comment" placeholder="What you noticed in the numbers and the notes">${esc(c.comment)}</textarea></div>
-      <div class="f"><label class="f-l" for="co-focus">Focus for next week</label>
-        <textarea id="co-focus" placeholder="One thing to hold on to">${esc(c.focus)}</textarea></div>
-      <button class="btn" onclick="saveCoachResponse()">Save response</button>`;
-    const r = document.getElementById('rate-coach');
-    r.innerHTML = [1, 2, 3, 4, 5].map(n =>
-      `<button type="button" aria-pressed="${_coachRating === n}" aria-label="${n} out of 5" onclick="setCoachRating(${n})" id="rate-coach-${n}">${n}</button>`).join('');
-  } else if (c.savedAt) {
-    el.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px">
-        <p style="font-size:16px;font-weight:600">${esc(coachLabel())}’s reply</p>
-        <span class="pill">${c.rating || '—'}/5</span>
-      </div>
-      ${c.comment ? `<p style="font-size:15px;line-height:23px;color:var(--t2)">${esc(c.comment)}</p>` : ''}
-      ${c.focus ? `<div class="divider"></div><p class="lbl" style="margin-bottom:6px">Focus for next week</p>
-        <p style="font-size:15px;line-height:23px">${esc(c.focus)}</p>` : ''}
-      <p class="t-meta" style="margin-top:12px">Replied ${new Date(c.savedAt).toLocaleDateString('en-AU', { day: 'numeric', month: 'short' })}</p>`;
-  } else {
-    el.innerHTML = `<p class="empty">No reply for this week yet.<br>Share the coach link and your check-in shows up on their side.</p>
-`;
-  }
+  const el = document.getElementById('ci-coach');
+  el.innerHTML = `
+    <div class="f">
+      <span class="f-l" id="cr-l">${esc(coachLabel())}’s rating of the week</span>
+      <div class="rate" role="group" aria-labelledby="cr-l" id="rate-coach"></div>
+    </div>
+    <div class="f"><label class="f-l" for="co-comment">Comments</label>
+      <textarea id="co-comment" placeholder="What stood out in the numbers and the notes">${esc(c.comment)}</textarea></div>
+    <div class="f"><label class="f-l" for="co-focus">Focus for next week</label>
+      <textarea id="co-focus" placeholder="One thing to hold on to">${esc(c.focus)}</textarea></div>
+    <button class="btn" onclick="saveCoachResponse()">Save ${esc(coachLabel())}’s response</button>
+    ${c.savedAt ? `<p class="t-meta" style="margin-top:10px">Last saved ${new Date(c.savedAt).toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' })}</p>` : ''}`;
+  document.getElementById('rate-coach').innerHTML = [1, 2, 3, 4, 5].map(n =>
+    `<button type="button" aria-pressed="${_coachRating === n}" aria-label="${n} out of 5" onclick="setCoachRating(${n})" id="rate-coach-${n}">${n}</button>`).join('');
 }
-// Coach view is a device-local switch, so Ben can preview without the URL.
-function toggleCoachView() {
-  const on = !IS_COACH;
-  if (on) sessionStorage.setItem('fm_view_as_coach', '1');
-  else sessionStorage.removeItem('fm_view_as_coach');
-  location.href = location.pathname + (on ? '?coach' : '');
-}
+
 function saveCoachName() {
   const st = getSettings();
   st.coachName = document.getElementById('set-coach').value.trim();
@@ -2666,29 +2637,12 @@ function fallbackCopy(text, msg) {
 }
 
 // ═══ INIT ═════════════════════════════════════════════════════════════════
-function applyCoachMode() {
-  if (!IS_COACH) return;
-  document.getElementById('coach-bar').hidden = false;
-  document.getElementById('coach-bar-text').textContent =
-    coachName() ? coachName() + '’s view — Ben’s data is read-only here'
-                : 'Coach view — Ben’s data is read-only here';
-  document.getElementById('ci-review-h').textContent = "Ben's review";
-  document.getElementById('ci-summary-sec').hidden = true;
-  // The coach lands on the check-in and cannot edit Ben's daily logs.
-  document.querySelectorAll('#tab-train input, #tab-train select, #tab-train textarea, #tab-fuel input, #tab-body input')
-    .forEach(el => { el.readOnly = true; el.disabled = true; });
-  document.querySelectorAll('#tab-train .btn, #tab-fuel .btn, #tab-body .btn, #tab-train .rate button, #tab-fuel .rate button, #tab-body .rate button, .seg button')
-    .forEach(el => { el.disabled = true; });
-}
-
 async function init() {
   ['trainFeel', 'moveFeel', 'sleepQ', 'energy', 'mood', 'dayRating'].forEach(buildRate);
   ['b-wt', 'b-fat', 'b-musc'].forEach(id => document.getElementById(id).addEventListener('input', updateDerived));
 
   // Paint immediately from localStorage — the data is already here.
-  applyCoachMode();
-  if (IS_COACH) setCheckinMode('weekly');
-  switchTab(IS_COACH ? 'checkin' : 'today');
+  switchTab('today');
   _syncState = 'syncing';
   renderSyncStamp();
 
